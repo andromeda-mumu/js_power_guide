@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>实参类型</title>
+</head>
+<body>
+<script>
+    function isArrayLike(a) {
+        if(!a)return false;
+        if(a.length>=0) return true;
+    }
+    function sum(a) {
+        if(isArrayLike(a)){
+            var total = 0;
+            for(var i=0;i<a.length;i++){
+                var element = a[i];
+                if(element == null) continue;
+                if(isFinite(element)) total += element;
+                else throw new Error("sum() :element must be finite numbers");
+            }
+            return total;
+        }
+        else throw new Error("sum() :argument must be array-like");
+    }
+   console.log(sum({x:1,y:2}));
+</script>
+</body>
+</html>

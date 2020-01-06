@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>作为私有命名空间的函数</title>
+</head>
+<body>
+<script>
+    var Set = (function invocation() {
+        function Set() {//构造函数是局部变量
+            this.values = {};
+            this.n=0;
+            this.add.apply(this,arguments);
+        }
+        Set.prototype.contains = function (value) {
+            return this.values.hasOwnProperty(v2s(value));//注意：这里调用的事v2s ，而不是set._v2s()
+        };
+        Set.prototype.size=function () {
+            return this.n;
+        };
+        Set.prototype.add = function () {
+        };
+        Set.prototype.remove=function(){};
+        //它们不属于模块的共有API，但它们都隐藏在这个函数的作用域内
+        function v2s(val){};
+        function objectId(o) {}
+        var nextId =1;
+        //这个模块的共有API是Set()构造函数,因此要将这个函数从私有命名空间中导出来，以便外部可以使用它，通过返回构造函数来导出他
+        return Set;
+    }());//立即执行
+
+    //创建一个全局变量，用来存放集合相关的模块
+    var collections;
+    if(!collections) collections ={};
+    //定义sets
+    collections.sets = (function namespace(){
+        //通过返回命名空间对象将API导出
+        return{
+            //导出的属性名：局部变量名字
+            AbstractSet:AbstractSet,
+            NotSet:NotSet,
+            AbstractEnumerableSet:AbstractEnumerableSet,
+            SingletonSet:AbstractWeitableSet,
+            ArraySet:ArraySet
+        };
+    }());
+
+    console.log("-----另一种方式 构造函数------");
+    var collections;
+    if(!collections) collections={};
+    collections.sets = (new function namespace(){
+        //将API导出至this对象
+        this.AbstractSet = AbstractSet;
+        this.NotSet = NotSet;
+        //注意，没有返回值
+    }());
+    
+    console.log("-----已经定义了全局命名空间对象，这个模块函数可以直接设置那个对象的属性------");
+    var collections;
+    if(!collections) collections ={};
+    collections.sets ={};
+    (function namespace(){
+        collections.sets.AbstraceSet = AbstractSet;
+        collections.sets.NotSet = NotSet;
+    }());
+    console.log("------------");
+     
+
+</script>
+</body>
+</html>

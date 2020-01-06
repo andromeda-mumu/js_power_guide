@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>防止类的扩展</title>
+</head>
+<body>
+<script>
+    var original_sort_method = Array.prototype.sort;
+    Array.prototype.sort = function () {
+        var start = new Date();
+        original_sort_method(this,arguments);
+        var end = new Date();
+        console.log("Array sort took "+(end-start)+"milliseconds");
+    };
+    var a = [1,2,5,3,2,2,1,7,0];
+
+</script>
+</body>
+</html>

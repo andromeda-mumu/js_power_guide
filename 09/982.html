@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>定义不可变的类</title>
+</head>
+<body>
+<script>
+    //既是构造函数 ，也是工厂函数
+    function Range(from,to) {
+        var props = {
+            from:{value:from,enumerable:true,writable:false,configurable:false},
+            to:{value:to,enumerable:true,writable:false,configurable:false}
+        };
+        if(this instanceof Range)
+            Object.defineProperty(this,props);//如果作为构造函数来调用，则定义属性
+        else
+            return Object.create(Range.prototype,props);//否则，作为工厂方法来调用，创建并返回这个新的range对象，属性有prop指定。
+    }
+
+    Object.defineProperties(Range.prototype,{
+        includes:{value:function(x){return this.from<=x && x<=this.to;}},
+        foreach:{value:function(f){for(var x=Math.ceil(this.from);x<=this.to;x++) f(x);}},
+        toString:{value:function(){return "("+this.from+"..."+this.to+")";}}
+    });
+
+    console.log("-----属性描述符工具函数------");
+
+    /**
+     * 将O的属性射嘴为不可写 不可配置
+     * @param o
+     * @returns {*}
+     */
+    function freezeProps(o){
+        var props = (arguments.length ==1)?Object.getOwnPropertyNames(o):Array.prototype.splice.call(arguments,1);
+        props.foreach(function (n) {
+            if(!Object.getOwnPropertyDescriptor(o,n).configurable)return;
+            Object.defineProperty(o,n,{writable:false,configurable:false});
+        });
+        return o;
+    }
+
+    /**
+     * 将O的属性设置为不可枚举 不可配置
+     */
+    function hideProps(o) {
+        var props =(arguments.length==1)?Object.getOwnPropertyNames(o):Array.prototype.splice.call(arguments,1);
+        props.forEach(function (n) {
+            if(!Object.getOwnPropertyDescriptor(o,n).configurable)return;
+            Object.defineProperty(o,n,{enumerable:false,configurable:false});
+        });
+        return o;
+    }
+
+    console.log("-----简单的不可变类------");
+    function Range(from,to){
+        this.from = from;
+        this.to =to;
+        freezeProps(this);//将属性设置为不可变
+    }
+    Range.prototype = hideProps({
+        constrcutor:Range,
+        includes:function(x){return this.from<=x && x<=this.to;},
+        foreach:function(f){for(var x=Math.ceil(this.from);x<=this.to;x++)f(x);},
+        toString:function(){return "("+this.from+"..."+this.to+")";}
+    });
+</script>
+</body>
+</html>

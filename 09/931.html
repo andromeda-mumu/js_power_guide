@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>类</title>
+</head>
+<body>
+<script>
+    function extend(o,p) {
+        for(prop in p){
+            o[prop]=p[prop];
+        }
+        return o;
+    }
+    function difineClass(constructor,methods,statics) {
+        if(methods) extend(constructor.prototype,methods);
+        if(statics) extend(constructor,statics);
+        return constructor;
+    }
+    var SimpleRange = difineClass(function(f,t){this.f=f;this.t=t;},
+        {
+            includes:function(x){return this.f<=x && x<=this.t;},
+            toString:function(){"("+this.f+"..."+this.t+")";}
+        },
+        {
+            upto:function(t){return new SimpleRange(0,t);}
+        }
+        );
+    console.log();
+</script>
+</body>
+</html>

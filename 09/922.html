@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>constructor属性</title>
+</head>
+<body>
+<script>
+    var F = function(){};
+    var p = F.prototype;
+    var c = p.constructor;
+    console.log(p);
+    console.log(c);
+    console.log(c === F);
+    var o = new F();
+    console.log(o.constructor === F);
+    
+    console.log("------预定义的函数------");
+    Range.prototype.includes= function(x){};
+    Range.prototype.foreach = function(f){};
+    Range.prototype.toString = function(){};
+    console.log(Range.prototype.constructor);
+    
+</script>
+</body>
+</html>

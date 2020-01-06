@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>实参类型</title>
+</head>
+<body>
+<script>
+    function isArrayLike(a) {
+        if(!a)return false;
+        if(a.length>=0) return true;
+    }
+    function flexisum(a) {
+        var total =0;
+        for(var i=0;i<arguments.length;i++){
+            var element = arguments[i];
+            var n;
+            if(element==null) continue;
+
+            if(isArrayLike(element)){
+                n=flexisum.apply(this,element);
+            }else if(typeof element === "function"){
+                n = Number(element());
+            }else {
+                n=Number(element);
+            }
+            if(isNaN(n)){
+                throw Error("flexisum(): can't convert "+element+"to number");
+            }
+            total +=n;
+        }
+        return total;
+    }
+    console.log(flexisum(function () {
+       return 20;
+    }));
+</script>
+</body>
+</html>

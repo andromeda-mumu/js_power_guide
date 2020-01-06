@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>bind()方法</title>
+</head>
+<body>
+<script>
+    function f(y) {
+        return this.x+y;
+    }
+    var o={x:1};
+    var g=f.bind(o);//把f绑定到o对象上，那么f函数里的this就指代o了
+    console.log(g(3));
+    console.log("------------");
+
+    function mybind(f,o) {
+        if(f.bind) return  f.bind(o);
+        else
+            return function () {
+                return f.apply(o,arguments);
+            };
+    }
+    var g=mybind(f,o);
+    console.log(g(2));
+</script>
+</body>
+</html>

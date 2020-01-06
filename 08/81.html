@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数定义</title>
+</head>
+<body>
+<script>
+    function printprops(o){
+        for(var p in o){
+            console.log(p+":"+o[p]+"\n");
+        }
+    }
+    printprops({x:1,y:2});
+    console.log("------------");
+    function distence(x1,y1,x2,y2) {
+        var dx=x2-x1;
+        var dy = y2-y1;
+        return Math.sqrt(dx*dx+dy*dy);
+    }
+    console.log(distence(1,4,6,2));
+    console.log("------------");
+    function factorial(x) {
+        if(x<=1) return 1;
+        return x*factorial(x-1);
+    }
+    console.log(factorial(4));
+    console.log("------------");
+    var square = function (x) {
+        return x*x;
+    }
+    console.log(square(3));
+    console.log("------------");
+    var f= function fact(x) {
+        if(x<=1)return 1;
+        else
+            return x*f(x-1);
+    };
+
+    console.log(f(5));
+    console.log("------------");
+var data=[1,32,54,2,];
+var re=data.sort(function (a,b) {
+   return a-b;
+})
+    console.log(re);
+console.log("------------");
+ var tens = (function (x) {
+     return x*x;
+ }(10));
+ console.log(tens);
+
+</script>
+</body>
+</html>

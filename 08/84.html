@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>作为值的函数</title>
+</head>
+<body>
+<script>
+    var a=[function (x) {
+        return x*x;
+    },20];
+    console.log(a[0](a[1]));
+    console.log("------------");
+    function add(x,y) {
+        return x+y;
+    }
+    function substract(x,y) {
+       return x-y; 
+    }
+    function multiply(x,y) {
+        return x*y;
+    }
+    function divide(x,y) {
+        return x/y;
+    }
+    
+    function operate(opt,opt1,opt2) {
+        return opt(opt1,opt2);
+    }
+    var i=operate(add,operate(add,2,3),operate(multiply,4,5));
+    console.log(i);
+    var operators ={
+        add:function (x,y) {
+            return x+y;
+        },
+        pow:Math.pow
+    };
+    console.log("------------");
+    function operate2(operation ,opt1,opt2) {
+        if(typeof operators[operation]==="function"){
+            return operators[operation](opt1,opt2);
+        }else
+            throw "unknow operator";
+    }
+    var j = operate2("add","hello",operate2("add"," ","world"));
+    console.log(j);
+    var k = operate2("pow",10,2);
+    console.log(k);
+</script>
+</body>
+</html>

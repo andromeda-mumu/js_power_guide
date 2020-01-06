@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义属性</title>
+</head>
+<body>
+<script>
+    uniqueNum.count =2;
+    function uniqueNum() {
+        return uniqueNum.count++;
+    }
+    console.log(uniqueNum());
+    console.log(uniqueNum());
+    console.log(uniqueNum());
+
+   console.log("------------");
+    function factorial(n) {
+        if(isFinite(n) && n>0 && n==Math.round(n)){
+            if(!(n in factorial)){
+                factorial[n] =n*factorial(n-1);
+            }
+            return factorial[n];
+        }
+        else return NaN;
+    }
+    factorial[1]=1;
+    console.log(factorial(4));
+
+</script>
+</body>
+</html>

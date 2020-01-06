@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数调用</title>
+</head>
+<body>
+<script>
+    var strict = (function () {
+        return !this;
+    })
+    console.log(strict());
+    console.log("------------");
+    var cal ={
+        op1:1,
+        op2:1,
+        add:function () {
+            this.result =this.op1+this.op2;
+        }
+    };
+    cal.add();
+    console.log(cal.result);
+    console.log("------------");
+    var o={
+        m:function () {
+            var self =this;
+            console.log(this === o);
+            f();
+            function f() {
+                console.log(this === o );
+                console.log(self === o);
+            }
+        }
+    }
+    o.m();
+</script>
+</body>
+</html>

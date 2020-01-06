@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>trace函数</title>
+</head>
+<body>
+<script>
+    function trace(o,m) {
+        var original =o[m];
+        o[m] = function () {
+            console.log("arg:"+arguments[0]);
+            console.log(new Date(),"entering;",m);
+            var result = original.apply(this,arguments);
+            console.log(new Date(),"exiting:",m);
+            return result;
+        }
+    }
+    var o={
+        add:function (x,y) {
+            return x+y;
+        }
+    };
+    console.log(o["add"](1,2));
+    trace(o,"add")
+    console.log(o["add"](1,2));
+</script>
+</body>
+</html>

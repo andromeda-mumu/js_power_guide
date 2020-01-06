@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>闭包</title>
+</head>
+<body>
+<script>
+  //   var scope ="global scope";
+  //   function checkscope() {
+  //       var scope ="local scope";
+  //       function f() {
+  //           return scope;
+  //       }
+  //       return f;
+  //   }
+  // var result =  checkscope()();
+  //   console.log(result);
+  //   console.log("------------");
+  //   var unique = (function () {
+  //       var counter =0;
+  //       return function () {
+  //           return counter++;
+  //       }
+  //   });
+  //   console.log(unique()());
+  //   console.log(unique()());
+  //   console.log(unique()());
+  //   console.log("------------");
+  //   function counter() {
+  //       var n=0;
+  //       return {
+  //           count:function(){return n++},
+  //           reset:function(){return n=0}
+  //       };
+  //   }
+  //   var c=counter();
+  //   var d= counter();
+  //   console.log(c.count());
+  //   console.log(d.count());
+  //   console.log(c.reset());
+  //   console.log(c.count());
+  //   console.log(d.count());
+  //   console.log("------------");
+    function counter(n) {
+        return{
+            get count(){return n++;},
+            set count(m){
+                if(m>n){
+                    n=m;
+                }else
+                    throw Error("could can only be set to a larger value");
+            }
+        };
+    }
+    var c = counter(1000);
+    console.log(c.count);
+    console.log(c.count);
+    console.log(c.count=2000);
+    console.log(c.count);
+</script>
+</body>
+</html>

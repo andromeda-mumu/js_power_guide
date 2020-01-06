@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数定义提前</title>
+</head>
+<body>
+<script>
+    console.log(ff(8));
+    function ff(x) {
+        return x*x;
+    }
+
+    console.log("------------");
+
+    var a = function (x) {
+        return x+10;
+    }
+    console.log(a(10));
+</script>
+</body>
+</html>

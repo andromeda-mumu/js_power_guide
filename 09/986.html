@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>属性描述符</title>
+</head>
+<body>
+<script>
+    (function namespace() { //将 所有逻辑闭包在一个私有函数作用域中
+        function properties() { //这个函数是所有对象的方法
+            var names;
+            if(arguments.length==0)
+                names = Object.getOwnPropertyNames(this);//所有的自有属性
+            else if(arguments.length ==1 && Array.isArray(arguments[0]))
+                names = arguments[0];
+            else
+                names = Array.prototype.splice.call(arguments,0);
+            return new Properties(this,names);
+        }
+        //将它设置为Object.prototype新的不可枚举的属性
+        Object.defineProperty(Object.prototype,"properties",{
+            value:properties,
+            enumerable:false,
+            writable:false,
+            configurable:true
+        });
+        //这个构造函数由上面的properties函数调用
+        //Properties类表示一个对象的属性集合
+        function Properties(o,names){
+            this.o =o;
+            this.names= names;
+        }
+        //将代表这些属性的对象设置为不可枚举的
+        Properties.prototype.hide = function () {
+            var o = this.o,hidden ={enumerable:false};
+            this.names.forEach(function (n) {
+                if(o.hasOwnProperty(n))
+                    Object.defineProperty(o,n,hidden);
+            });
+            return this;
+        };
+
+        //将这些属性设置为只读和不可配置
+        Properties.prototype.freeze = function () {
+            var o=this.o,frozen = {writable:false,configurable:false};
+            this.names.forEach(function (n) {
+                if(o.hasOwnProperty(n))
+                    Object.defineProperty(o,n,frozen);
+            });
+            return this;
+        };
+        //返回一个对象，这个对象是名字到属性描述符的映射表
+        //使用它来赋值属性，连同属性特性一起赋值
+        //Object.defineProperties(dest,src.properties().descriptors());
+        Properties.prototype.descriptors = function () {
+            var o = this.o,desc={};
+            this.names.forEach(function (n) {
+                if(!o.hasOwnProperty(n)) return ;
+                desc[n] = Object.getOwnPropertyDescriptor(o,n);
+            });
+            return desc;
+        };
+        //返回一个格式化的属性列表
+        Properties.prototype.toString=function () {
+            var o=this.o;
+            var lines = this.names.map(nameToString);
+            return "{\n"+lines.join(",\n")+"\n}";
+            function nameToString(n){
+                var s ="",desc=Object.getOwnPropertyDescriptor(o,n);
+                if(!desc) return "nonexistent" +n+": undefined";
+                if(!desc.configurable) s+="permnent";
+                if((desc.get &&!desc.set)||!desc.writable) s+="readonly";
+                if(!desc.enumerable) s+="hidden";
+                if(desc.get || desc.set) s+="accessor"+n;
+                else
+                    s+=n+":"+((typeof desc.value==="function")?"function":desc.value);
+                return s;
+            }
+        };
+        //将原型对象的实例方法设置为不可枚举的
+        Properties.prototype.properties().hide().toString();
+    }());
+
+
+</script>
+</body>
+</html>

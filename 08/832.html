@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>可变长的实参数</title>
+</head>
+<body>
+<script>
+    function max(/*...*/) {
+        var max = Number.NEGATIVE_INFINITY;
+        for(var i=0;i<arguments.length;i++){
+            if(arguments[i]>max) max = arguments[i];
+        }
+        return max;
+    }
+    var largest = max(1,10,100,2,1000,80);
+    console.log(largest);
+
+    console.log("------------");
+    function f(x) {
+        console.log(x);
+        arguments[0]="a";
+        console.log(x);
+    }
+    f(1,2);
+
+    console.log("------------");
+    var data = function (x) {
+        if(x<=1) return 1;
+        return x*arguments.callee(x-1);
+    }
+    console.log(data(3));
+</script>
+</body>
+</html>

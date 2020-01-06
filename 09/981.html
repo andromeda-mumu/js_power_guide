@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>定义不可枚举属性</title>
+</head>
+<body>
+<script>
+    //将代码保证在一个匿名函数中，这样定义的变量就在这个函数作用域内
+    (function () {
+        //定义一个不可枚举的属性objectId,它可以被所有对象继承、
+        Object.defineProperty(Object.prototype,"objectId",{
+            get:idGetter,
+            enumerable:false,
+            configurable:false
+        });
+        function idGetter(){
+            if(!(idprop in this)){
+                if(!Object.isExtensible(this))
+                    throw Error("can't define id for nonextensible objects");
+                Object.defineProperty(this,idprop,{
+                    value:nextid++,
+                    writable:false,
+                    enumerable:false,
+                    configurable:false
+                });
+            }
+            var idprop = "|**objectid**|";
+            var nextid =1;
+        }
+    }());
+
+
+</script>
+</body>
+</html>
