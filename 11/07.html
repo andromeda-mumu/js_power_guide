@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>E4X</title>
+</head>
+<body>
+<script>
+    console.log("-----不能运行的------");
+    //创建一个xml对象
+    var pt =
+        <periodicatable>
+        <element id="1"><name>Hydrogen</name></element>
+            <element id="2"><name>mmc</name></element>
+            <element id="3"><name>zhuzhu</name></element>
+    </periodictable>;
+    pt.element +=<element id="4"><name>nnn</name></element>;
+
+    pt=<periodicatable></periodicatable>
+    var elements = ["Hhh","mmc","zhuzhu"];
+    for(var n=0;n<elements.length;n++){
+        pt.elemnt += <element id ={n+1}>
+    }
+
+    var lightElements = pt.element.(@id<3);
+    var bEle=pt.element.(name.chatAt(0)=='B').name;
+
+    delete pt.element[0].@symbol;//删除一个属性
+    delete pt..weight;//删除一个weight标签
+    
+    console.log("-----E4X调用xml对象的方法------");
+    pt.insertChildBefore(pt.element[1],<element id ="1"><name>mmc</name></element>);
+
+    console.log("-----命名空间------");
+    default xml namespace ="http://www.w3.org/1999/xhtml";
+    d =<html>
+       <body>
+            this is a small red square:
+        <svg xmlns="htpp://www.w3.org/2000/svg" width="10" height="10">
+            <rect x="0" y="0" width="10" height="10" fill="red"/>
+        </svg>
+        </body>
+        </html>
+    var tagname = d.body.name();
+    var bodyns = tagname.uri;
+    var localname=tagname.localname;
+    
+    var svg = new Namespace("http://www.w3.org/2000/svg");
+    var color=d..svg::rect.@fill; //red
+    
+</script>
+</body>
+</html>

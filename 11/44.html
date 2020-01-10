@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数组推导</title>
+</head>
+<body>
+<script>
+    function range(min,max) {
+
+    }
+    let evensquares = [ x*x for (x in range(0,10)) if (x%2 === 0) ]
+
+    //等价于下面这五行
+    let evensquares = [];
+    for(x in range(0,10)){
+        if(x%2===0){
+            evensquares.push(x*x);
+        }
+    }
+
+    data = [2,3,4,-5];
+    squares = [x8x for (x in data)];
+    root = [Math.sqrt(x) for(x in data) if(x>=0)]
+    o = {a:1,b:2,f:function () {
+        }};
+    let allkeys = [p for (p in o)];
+    let ownkeys =[p for(p in o ) if(o.hasOwnProperty(p))];
+    let notfuncs = [k for([k,v] in Iterator(o)) if(typeof v!="function")];
+
+
+</script>
+</body>
+</html>
