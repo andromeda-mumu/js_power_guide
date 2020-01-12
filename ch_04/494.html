@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>instanceOf运算符</title>
+</head>
+<body>
+<script>
+    var d = new Date();
+    var a =d instanceof Date;
+    var b = d instanceof Object;
+    var c = d instanceof Number;
+    console.log(a);
+    console.log(b);
+    console.log(c);
+
+    var a=[1,2,4];
+    var r1 =a instanceof Array;
+    var r2 = a instanceof Object;
+    var r3 = a instanceof RegExp;
+    console.log(r1);
+    console.log(r3);
+    console.log(r2);
+
+</script>
+</body>
+</html>

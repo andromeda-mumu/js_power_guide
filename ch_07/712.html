@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数组的字符串</title>
+</head>
+<body>
+<script>
+    var s= "javascript";
+    console.log(Array.prototype.join.call(s," "));
+    console.log(Array.prototype.filter.call(s,function (x) {
+        return x.match(/[^aeiou]/);
+    }).join("-"));
+</script>
+</body>
+</html>

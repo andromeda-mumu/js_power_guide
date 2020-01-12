@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>高阶函数</title>
+</head>
+<body>
+<script>
+    function not(f) {
+       return function () {
+           var result = f.apply(this,arguments);
+           return !result;
+       };
+    }
+
+    var even = function (x) {
+        return x%2===0;
+    }
+    var odd = not(even);
+   var s=  [1,2,3,5,5].every(odd);
+   console.log(s);
+   
+   console.log("----------------");
+   function compose(f,g) {
+       return function () {
+           return f.call(this,g.apply(this,arguments));
+       };
+   }
+   var square = function(x){return x*x;};
+   var sum = function(x,y){return x+y;};
+   var squareofsum = compose(square,sum);
+   console.log(squareofsum(2,3));
+   
+</script>
+</body>
+</html>

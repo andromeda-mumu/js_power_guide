@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>object.create</title>
+</head>
+<body>
+<script>
+    var o =Object.create({x:1,y:2});
+    console.log(o.x);
+    
+    var z=Object.create(null);
+    z.x=1;
+    console.log(z.x+"2");
+    
+    console.log("----------6-1-------");
+    function inherit(p) {
+        if(p==null) throw TypeError;
+        if(Object.create){
+            return Object.create(p);
+        }
+        var t = typeof p;
+        if(t!="object" && t!="function")throw TypeError;
+        function f() {
+        };
+        f.prototype =p;
+        return new f();
+    }
+
+    var point ={x:1,y:2};
+    var n = inherit(point);
+    n.x =4;
+    console.log(n.x);
+    console.log(point.x);
+</script>
+</body>
+</html>

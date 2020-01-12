@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>类数组</title>
+</head>
+<body>
+<script>
+    var a={};
+    var i=0;
+    while(i<10){
+        a[i]=i*i;
+        i++;
+    }
+    a.length=i;
+    var total =0;
+    for(var j=0;j<a.length;j++){
+        total+=a[j];
+    }
+    console.log(total);
+    console.log("----------------");
+    function isArrayLike(o) {
+        if(o && 
+        typeof o==="object" &&
+        isFinite(o.length) &&
+        o.length>=0 &&
+        o.length===Math.floor(o.length) &&
+        o.length<4294967296)
+        return true;
+            else 
+                return false;
+    }
+    console.log(isArrayLike(a));
+    console.log("----------------");
+    var a={"0":"a","1":"b","2":"c",length:3};
+    console.log(Array.prototype.join.call(a,"+"));
+    console.log(Array.prototype.slice.call(a,0));
+    console.log(Array.prototype.map.call(a,function (x) {
+        return x.toUpperCase();
+    }));
+    console.log("----------------");
+    Array.join = Array.join || function (a,sep) {
+        return Array.prototype.join.call(a.sep);
+    };
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>定义子类</title>
+</head>
+<body>
+<script>
+    function defineSubclass(superclass,constructor,methods,statics) {
+        constructor.prototype= inherit(superclass.prototype);
+        constructor.prototype.constructor = constructor;
+        if(methods) extend(constructor.prototype,methods);
+        if(statics) extend(constructor,statics);
+        return constructor;
+    }
+    Function.prototype.extend = function(constructor,methods,statics){
+        return defineSubclass(this,constructor,methods,statics);
+    };
+
+</script>
+</body>
+</html>

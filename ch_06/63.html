@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>删除属性</title>
+</head>
+<body>
+<script>
+    var o ={x:1};
+    console.log(delete o.x);
+    console.log(delete o.toString);
+    console.log(delete 1);
+
+    console.log("----------------");
+    console.log(delete Object.prototype);
+    var x=1;
+    console.log(delete this.x);
+    function f() {
+
+    }
+    console.log(delete this.f);
+</script>
+</body>
+</html>

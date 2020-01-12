@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>存取器属性</title>
+</head>
+<body>
+<script>
+    var serialnum ={
+        $n:0,
+        get next(){return this.$n++;},
+        set next(n){
+            if(n>=this.$n){
+                this.$n = n;
+            }else{
+                throw "序列号的值不能比当前值小"
+            }
+        }
+
+    };
+    console.log(serialnum.$n);
+    console.log(serialnum.next);
+    console.log(serialnum.next);
+    serialnum.next=3
+    console.log(serialnum.next);
+    console.log(serialnum.next);
+    console.log("----------------");
+    var radom ={
+        get ictet(){return Math.floor(Math.random()*256)},
+        get uint16(){return Math.floor(Math.random()*65536)},
+        get int16(){return Math.floor(Math.random()*65536)-32768}
+    }
+    console.log(radom.ictet);
+    console.log(radom.uint16);
+    console.log(radom.int16);
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>检测属性</title>
+</head>
+<body>
+<script>
+    var o={x:1};
+    console.log("x" in o);
+    console.log("y" in o);
+    console.log("toString" in o);
+console.log("----------------");
+console.log(o.hasOwnProperty("x"));
+console.log(o.hasOwnProperty("y"));
+console.log(o.hasOwnProperty("toString"));
+
+    function inherit(p) {
+        if(p==null) throw TypeError;
+        if(Object.create){
+            return Object.create(p);
+        }
+        var t = typeof p;
+        if(t!="object" && t!="function")throw TypeError;
+        function f() {
+        };
+        f.prototype =p;
+        return new f();
+    }
+
+    console.log("----------------");
+    var o=inherit({x:1})
+    o.x=2;
+    console.log(o.propertyIsEnumerable("x"));
+    console.log(o.propertyIsEnumerable("y"));
+    console.log(o.propertyIsEnumerable("toString"));
+    console.log(Object.prototype.propertyIsEnumerable("toString"));
+    console.log("----------------");
+    
+    console.log(o.x!==undefined);
+    console.log(o.y!==undefined);
+</script>
+</body>
+</html>

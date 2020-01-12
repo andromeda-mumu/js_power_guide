@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dowhile</title>
+</head>
+<body>
+<script>
+    function  printArray(a) {
+        var len =a.length,i=0;
+        if(len==0) {
+            console.log("a is empty");
+        }else{
+            do{
+                console.log(a[i]);
+            }while (++i<len)
+            
+        }
+    }
+    var aa= [5,3,4,5,5,9];
+    console.log(printArray(aa));
+</script>
+</body>
+</html>

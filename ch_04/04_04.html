@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>属性访问表达式</title>
+</head>
+<body>
+<script>
+    var o ={x:1,y:{z:3}};
+    var a=[o,4,[5,6]];
+    console.log(o.x);
+    console.log(o.y.z);
+    console.log(o["x"]);
+    console.log(a[1]);
+    console.log(a[2]["1"]);
+    console.log(a[0].x);
+</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>私有状态</title>
+</head>
+<body>
+<script>
+    function Range(from,to) {
+        this.from = function () {
+            return from;//这些值都保存在闭包中
+        };
+        this.to = function(){return to;};
+    }
+    Range.prototype ={
+        constructor:Range,
+        includes:function(x){return this.from()<=x && x<=this.to();},
+        foreach:function(f){for(var x=Math.ceil(this.from()),max=this.to();x<=max;x++){
+            f(x);
+        }},
+        toString:function(){
+            return "("+this.from()+"..."+this.to()+")";
+        }
+    };
+    var range = new Range(0,20);
+    console.log(range.from());
+    console.log(range.to());
+    range.from = function () {
+        return 10;
+    }
+    console.log(range.from());
+</script>
+</body>
+</html>

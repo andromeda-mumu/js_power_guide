@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>迭代器</title>
+</head>
+<body>
+<script >
+    function counter(start) {
+        let nextvalue = Math.round(start);
+        return {next:function () {
+                return nextvalue++;
+            }};
+    }
+    
+    let s =counter(100);
+    let s1= s.next();
+    let s2= s.next();
+    console.log(s1);
+    console.log(s2); 
+    
+    console.log("------某个范围的迭代器----------");
+    // function rangeIter(first,last) {
+    //     let nextvalue = Math.ceil(first);
+    //     return {
+    //         next:function () {
+    //             if(nextvalue>last) throw StopIteration;
+    //             return nextvalue++;
+    //         }
+    //     }
+    // }
+    //
+    // let r = rangeIter(1,5);
+    // while (true){
+    //     try{
+    //         console.log(r.next());
+    //     }catch (e) {
+    //         if(e==StopIteration) break;
+    //         else throw e;
+    //     }
+    // }
+    
+    // console.log("-----foreach返回迭代器对象--------");
+    // function range(min,max) {
+    //     return{
+    //         get min(){return min;},
+    //         get max(){return max;},
+    //         includes:function (x) {
+    //             return min<=x && x<=max;
+    //         },
+    //         toString:function () {
+    //             return "["+min+","+max+"]";
+    //         },
+    //         _iterator_:function () {
+    //             let val = Math.ceil(min);
+    //             return {
+    //                 next:function () {
+    //                     if(val>max)
+    //                         throw StopIteration;
+    //                     return val++;
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+    //
+    // let i =1;
+    // while(range(1,10).includes(i)){
+    //     console.log(i);
+    // }
+
+    // for(let [k,v] in Iterator({a:1,b:2})){
+    //     console.log(k+"="+v);
+    // }
+
+    o={x:1,y:2};
+    Object.prototype.z=3;
+    for(p in o) console.log(p);
+    for(p in Iterator(o,true))console.log(p);
+
+</script>
+</body>
+</html>

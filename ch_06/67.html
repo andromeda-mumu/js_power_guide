@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>属性的特性</title>
+</head>
+<body>
+<script>
+    console.log(Object.getOwnPropertyDescriptor({x:1},"x"));
+    console.log(Object.getOwnPropertyDescriptor({},"x"));
+    console.log(Object.getOwnPropertyDescriptor({},"toString"));
+    
+    console.log("----------------");
+    var o={};
+    Object.defineProperty(o,"x",{
+        value:1,
+            writable:true,
+            enumerable:false,
+            configurable:true
+    });
+    console.log(o.x);
+    console.log(Object.keys(o));
+    Object.defineProperty(o,"x",{writable:false});
+    o.x=2;
+    console.log(o.x);
+    
+    Object.defineProperty(o,"x",{value:20});
+    console.log(o.x);
+    
+    Object.defineProperty(o,"x",{get:function(){return 0;}});
+    console.log(o.x);
+    console.log("----------------");
+    var p=Object.defineProperties({},{
+        x:{value:1,writable:true,enumerable:true,configurable:true},
+        y:{value:3,writable:false,enumerable:false}
+    });
+    console.log(p.x);
+    console.log(p.y);
+</script>
+</body>
+</html>

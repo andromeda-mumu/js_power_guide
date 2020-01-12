@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>属性get与set</title>
+</head>
+<body>
+<script>
+    var p={
+        x:1.0,
+        y:2.0,
+        get r(){return Math.sqrt(this.x*this.x+this.y*this.y)},
+        set r(newvalue){
+            var oldvalue = Math.sqrt(this.x*this.x+this.y*this.y);
+            var radio = newvalue/oldvalue;
+            this.x*=radio;
+            this.y *=radio;
+            },
+        get theta(){}
+    };
+    function inherit(p) {
+        if(p==null) throw TypeError;
+        if(Object.create){
+            return Object.create(p);
+        }
+        var t = typeof p;
+        if(t!="object" && t!="function")throw TypeError;
+        function f() {
+        };
+        f.prototype =p;
+        return new f();
+    }
+    console.log(p.r);
+    p.r = 20;
+    console.log(p.r);
+    console.log("----------------");
+    console.log(p.theta);
+    console.log(p.theta);
+    console.log(p.theta);
+
+    
+    var q = inherit(p);
+    q.x=1,q.y=1;
+    console.log(q.r);
+    console.log("----------------");
+
+    console.log(q.theta);
+    console.log(q.theta);
+    console.log(q.theta);
+
+</script>
+</body>
+</html>

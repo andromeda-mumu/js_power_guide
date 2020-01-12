@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>forin</title>
+</head>
+<body>
+<script>
+    var o={x:1,y:2,z:3};
+    var a=[],i=0;
+    for(a[i++] in o);
+    console.log(a);
+    for(i in a)
+        console.log(i);
+</script>
+</body>
+</html>

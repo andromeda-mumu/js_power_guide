@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>变量作用域</title>
+</head>
+<body>
+<script>
+    // var scope ="global";
+    // function checkScope() {
+    //     var scope ="local";
+    //     return scope;
+    // }
+    // console.log(checkScope());
+    
+    //   scope ="global";
+    // function checkScope() {
+    //    var scope ="local";
+    //     myscope = "local";
+    //     return [scope,myscope];
+    // }
+    // console.log(checkScope());
+    // console.log(scope);
+    // console.log(myscope);
+    //
+    
+    var scope ="global"
+    function checkScpoe() {
+        var scope ="local";
+        function nested() {
+            var scope = "nested scope";
+            return scope;
+        }
+        return nested();
+    }
+    console.log(checkScpoe());
+    
+</script>
+</body>
+</html>

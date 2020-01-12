@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>类属性</title>
+</head>
+<body>
+<script>
+    function clasof(o) {
+        if(o===null) return"null";
+        if(o===undefined) return "Undefined";
+        return Object.prototype.toString.call(o).slice(8,-1);
+    }
+    console.log(clasof({}));
+    console.log(clasof(1));
+    console.log(clasof(true));
+</script>
+</body>
+</html>

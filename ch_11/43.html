@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>生成器</title>
+</head>
+<body>
+<script>
+    function* range(min,max){
+        for(let i = Math.ceil(min);i<=max;i++)yield i;
+    }
+    for(let n in range(3,8)) console.log(n);
+    console.log("-------斐波那数列---------");
+    function* fibonacci() {
+        let x=0,y=1;
+        while(true){
+            yield y;
+            [x,y]=[y,x+y];
+        }
+    }
+    f = fibonacci();
+    for(let i=0;i<10;i++) console.log(f.next());
+    // function* sub() {
+    //     for (let i = 65; i < 70; i++) {
+    //         yield String.fromCharCode(i);
+    //     }
+    // }
+    //
+    // function* main() {
+    //     yield "begin";
+    //     yield sub();    // 返回的是 sub() 的结果，一个对象
+    //     yield "---------";
+    //     yield* sub();   // 依次返回 sub() 结果的的每一项
+    //     yield "end";
+    // }
+    //
+    // for (var v of main()) {
+    //     console.log(v);
+    // }
+</script>
+</body>
+</html>

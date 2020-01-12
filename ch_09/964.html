@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>比较方法</title>
+</head>
+<body>
+<script>
+    Range.prototype.constructor=Range;
+    Range.prototype.equals= function (that) {
+        if(that==null) return false;
+        if(that.constructor !==Range)return false;
+        return this.from == that.from && this.to == that.to;
+    }
+    // Range.prototype.compareTo = function(that){
+    //     return this.from -that.from;
+    // };
+    console.log("-----优化 equals 要与compareTo一致--------");
+    Range.prototype.compareTo = function (that) {
+        if(!(that instanceof Range)) throw new Error("can't compare a Range with"+that);
+        var diff = this.from-that.from;
+        if(diff==0) diff =this.to - that.to;
+        return diff;
+    };
+    var ranges = new Range(0,10);
+    ranges.sort(function (a,b) {
+        return a.compareTo(b);
+    });
+    Range.byLowerBound = function(a,b){return a.compareTo(b);};
+    ranges.sort(Range.byLowerBound);
+
+</script>
+</body>
+</html>

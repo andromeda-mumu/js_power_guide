@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>singletonSet</title>
+</head>
+<body>
+<script>
+    function SingletonSet(member) {
+        this.member = member;
+    }
+    SingletonSet.prototype = inherit(Set.prototype);
+    extend(SingletonSet.prototype,{
+        constructor:SingletonSet,
+        add:function(){throw "add-only set";},
+        remove :function(){throw "read-only set";},
+        size:function(){return 1;},
+        foreach:function(f,context){f.call(context,this.member);},
+        contains:function(x){return x===this.member;}
+    });
+    SingletonSet.prototype.equals = function (that) {
+        return that instanceof Set && that.size()==1 && that.contains(this.member);
+    }
+</script>
+</body>
+</html>

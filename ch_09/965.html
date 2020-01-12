@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>方法借用</title>
+</head>
+<body>
+<script>
+    var generic = {
+        toString:function () {
+            var s= "[";
+            if(this.constructor && this.constructor.name){
+                s+=this.constructor.name+":";
+            }
+            var n=0;
+            //非继承 非函数
+            for(var name in this){
+                if(!this.hasOwnProperty(name))continue;
+                var value = this[name];
+                if(typeof value === "function")continue;
+                if(n++)s+=",";
+                s+=name+"="+value;
+            }
+            return s+"]";
+        },
+        //枚举所有非继承非函数的熟悉
+        equals:function(that){
+            if(that == null) return false;
+            if(this.constructor !== that.constructor) return false;
+            for(var name in this){
+                if(name === "|**objectid**|")continue;
+                if(!this.hasOwnProperty(name)) continue;
+                if(this[name]!==that[name]) return false;
+            }
+            return true;
+        }
+    };
+    Range.prototype.toString=generic.toString();//借用泛型的toString方法
+    Range.prototype.equals = generic.equals();
+
+</script>
+</body>
+</html>

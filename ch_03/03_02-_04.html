@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>匹配模式</title>
+</head>
+<body>
+<script>
+    var p1=/^HTML/;//匹配HTML开始的字母
+    var p2 =/[1-9][0-9]*/;//匹配非0数字，后面是任意数字
+    var p3=/\bjavascript\b/i; //匹配javascript忽略大小写
+    
+    var test="testing:1,2,3";
+    var pattern =/\d+/g;//匹配所有一个或多个包含数字的实例
+    console.log(pattern.test(test));
+    console.log(test.search(pattern));
+    console.log(test.match(pattern));
+    console.log(test.replace(pattern,"#"));
+    console.log(test.split(/\D+/));//用非数字字符截取字符串 ["","1","2","3"];
+    
+    console.log("-------------");
+    console.log(p1.test("HTMLaaaa"));
+    console.log(p1.test("HTML a"));
+    console.log(p2.test("89aasd89"));
+    console.log(p3.test("javascrIpt"));
+    
+</script>
+</body>
+</html>

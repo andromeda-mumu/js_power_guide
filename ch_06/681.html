@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原型属性</title>
+</head>
+<body>
+<script>
+    var p = {x:1};
+    var o = Object.create(p);
+    console.log(p.isPrototypeOf(o));
+    console.log(Object.prototype.isPrototypeOf(o));
+</script>
+</body>
+</html>

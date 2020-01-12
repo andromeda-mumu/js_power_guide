@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>在子类中调用父类的构造函数和方法</title>
+</head>
+<body>
+<script>
+    function NonNullSet() {
+        Set.apply(this,arguments);
+    }
+    NonNullSet.prototype  = inherit(Set.prototype);
+    NonNullSet.prototype.constructor = NonNullSet;
+
+    NonNullSet.prototype.add = function () {
+        for(var i=0;i<arguments.length;i++){
+            if(arguments[i]==null){
+                throw new Error("can't add null or undefined to a NonNullSet ");
+            }
+        };
+        //调用父类的add执行实际插入操作
+        return  Set.prototype.add.apply(this,arguments);
+    };
+
+    var StringSet = fileredSetSubclass(Set,function(x){return typeod x==='string';});
+    var MySet = filteredSetSubclass(NonNullSet,function(x){return typeof x!=='function';})
+
+</script>
+</body>
+</html>

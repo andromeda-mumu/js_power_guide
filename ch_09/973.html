@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组合代替继承</title>
+</head>
+<body>
+<script>
+    var FilteredSet = Set.extend(
+        function FilteredSet(set,filter){
+            this.set = set;
+            this.filter = filter;
+        },
+        {
+            add:function () {
+                if(this.filter){
+                    for(var i=0;i<arguments.length;i++){
+                        var v= arguments[i];
+                        if(!this.filter(v)){
+                            throw new Error("filteredSet: value"+v+" rejected by filter");
+                        }
+                    }
+                }
+                this.set.add.apply(this.set,arguments);
+                return this;
+            },
+            remove:function () {
+                this.set.remove.apply(this.set,arguments);
+                return this;
+            },
+            contains:function (v) {
+                return this.set.contains(v);
+            },
+            size:function(){return this.set.size();},
+            foreach:function(f,c){this.set.foreach(f,c);}
+        }
+    );
+    var s= new FilteredSet(new Set(),function(x){return x!==null;});
+    var s= new FilteredSet(s,{function(x){return !(x instanceof Set);}})
+</script>
+</body>
+</html>

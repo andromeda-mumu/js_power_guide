@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>对象直接量</title>
+</head>
+<body>
+<script>
+    var empty ={};
+    var point ={x:0,y:0};
+    var point2={x:point.x,y:point.y};
+    var book={
+        "main title":"javascript",
+        "sub-title":"the definitive Guide",
+        "for":"all audiences",
+        "author":{
+            firstname:"David",
+            secondName:"Flanagan"
+        }
+    };
+    console.log(book.author.firstname);
+    console.log(book["sub-title"]);
+
+</script>
+</body>
+</html>

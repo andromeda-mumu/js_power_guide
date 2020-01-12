@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数组类型</title>
+</head>
+<body>
+<script>
+    var isArray=Function.isArray || function (o) {
+        return typeof o ==="object" &&
+                Object.prototype.toString().call(o)==="[object Array]";
+    }
+    console.log([1,2,3].isArray);
+</script>
+</body>
+</html>

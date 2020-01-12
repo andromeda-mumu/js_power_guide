@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用于模式匹配的String方法</title>
+</head>
+<body>
+<script>
+    console.log("JavaScript".search(/script/i));
+    var text ="javasCrIPT--JAVASCRIPTabcjavascript";
+    console.log(text.replace(/javascript/ig,"JavaScript"));
+    
+    text='"hello world"';
+    var quote =/"([^"]*)"g/;
+    console.log(text.replace(quote,' "$1" '));
+    console.log("1 plus 2 wquls 3".match(/\d+/g));
+
+    console.log("-----解析url--------");
+    var url =/(\w+):\/\/([\w.]+)\/(\S*)/;
+    var text ="Visit my blog at http://www.example/com/~david";
+    var result = text.match(url);
+    console.log(result);
+    if(result!=null){
+        var fullurl = result[0];
+        var protocol =result[1];
+        var host = result[2];
+        var path =result[3];
+        console.log(fullurl);
+        console.log(protocol);
+        console.log(host);
+        console.log(path);
+    }
+
+    console.log("--------split--------");
+    console.log(" 1, 2,  3,4,5 ".split(/\s*,\s*/));
+
+</script>
+</body>
+</html>

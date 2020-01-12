@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RegExp的方法</title>
+</head>
+<body>
+<script>
+    var pattern = /Java/ig;
+    var text = "JavaScript is more fun than java!";
+    var result ;
+    while((result=pattern.exec(text))!=null){
+        alert("Matched'"+result[0]+"'"+"at position "+result.index+"; next search begins at "+pattern.lastIndex);
+    }
+
+</script>
+</body>
+</html>

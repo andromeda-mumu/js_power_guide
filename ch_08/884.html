@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>记忆</title>
+</head>
+<body>
+<script>
+    function memorize(f) {
+        var cache ={};
+        return function(){
+            var key = Array.prototype.join.call(arguments,",");
+            console.log("key : "+key);
+            if(key in cache ) {
+                console.log("cache["+key+"] :"+cache[key]);
+                return cache[key];
+            }
+            else return cache[key]=f.apply(this,arguments);
+        };
+    }
+    
+    console.log("-------返回2个整数的最大公约数---------");
+    function gcd(a,b) {
+        var t;
+        if(a<b) t=b,b=a,a=t;
+        while (b!=0)t=b,b=a%b,a=t;
+        return a;
+    }
+    
+    var gcddemo = memorize(gcd);
+    var result = gcddemo(85,187);
+    console.log(result);
+
+    console.log("-------递归---------");
+    var factorial = memorize(function (n) {
+        return (n<=1)?1:n*factorial(n-1);
+    });
+    console.log(factorial(5));
+    console.log(factorial(4));
+</script>
+</body>
+</html>

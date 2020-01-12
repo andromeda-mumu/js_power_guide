@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>可调用对象</title>
+</head>
+<body>
+<script>
+    function isFunc(x) {
+        return Object.prototype.toString.call(x) ==="[object,function]";
+    }
+    console.log(isFunc(document));
+</script>
+</body>
+</html>

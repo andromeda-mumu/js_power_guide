@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>构造函数的名称</title>
+</head>
+<body>
+<script>
+    function clasof(o) {
+        if(o===null) return"null";
+        if(o===undefined) return "Undefined";
+        return Object.prototype.toString.call(o).slice(8,-1);
+    }
+    Function.prototype.getName=function () {
+        return this.name || this.toString().match(/function\s*([^()*])/)[1];
+    };
+    
+    function type(o) {
+        var t,c,n;
+        if(o===null) return "null";
+        if(o!==o) return "nan";
+        if((t=typeof o) !=="object") return t;
+        if((c=clasof(o))!== "Object") return c;
+        if(o.constructor && typeof o.constructor === "function" && (n=o.constructor.getName())) return n;
+        return "Object";
+    }
+    function g(){}
+    console.log(type(g));
+    console.log(type(new Date()));
+    console.log(type(new RegExp()));
+    console.log(type(1283));
+    console.log(type(true));
+    console.log(type([1,2,3]));
+    
+    console.log("-----构造函数没有名字--------");
+    var complex = function (x,y) {
+        this.r=x;
+        this.i=y;
+    }
+    console.log("-----构造函数有名字--------");
+    var Range = function Range(f,t) {
+        this.from = f;
+        this.to = t;
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>枚举类型</title>
+</head>
+<body>
+<script>
+    function enumeration(namesToValues) {
+        var enumeration = function () {
+            throw "can't Instantiate Enumerations";
+        };
+        var proto = enumeration.prototype ={
+            constructor:enumeration,
+            toStirng:function(){return this.name;},
+            valueOf:function(){return this.value;},
+            toJson:function(){return this.name;}
+        };
+        enumeration.values=[];
+        for(name in namesToValues){
+            var e = inherit(proto);
+            e.name=name;
+            e.value=namesToValues[name];
+            enumeration[name]=e;
+            enumeration.values.push(e);
+        }
+        enumeration.foreach = function (f,c) {
+            for(var i=0;i<this.values.length;i++){
+                f.call(c,this.values[i]);
+            }
+        };
+        return enumeration;
+    }
+    function inherit(p) {
+        if(p==null) throw TypeError;
+        if(Object.create){
+            return Object.create(p);
+        }
+        var t = typeof p;
+        if(t!="object" && t!="function")throw TypeError;
+        function f() {
+        };
+        f.prototype =p;
+        return new f();
+    }
+    // var Coin = enumeration({Penny:1,Nickel:5,Dime:10,Quarter:25});
+    // var c= Coin.Dime;
+    // console.log(c instanceof Coin);
+    // console.log(c.constructor == Coin);
+    // console.log(Coin.Quarter+3*Coin.Nickel);
+    // console.log(Coin.Dime == 10);
+    // console.log(Coin.Dime >Coin.Nickel);
+    // console.log(String(Coin.Dime)+":"+Coin.Dime);
+    // console.log(c.foreach(console.log()));
+
+    console.log("-----一副扑克牌--------");
+    function Card(suit,rank) {//一张牌的类
+        this.suit = suit;
+        this.rank = rank;
+    }
+    //枚举定义牌的花色 和 点数
+    Card.Suit = enumeration({Clubs:1,Diamonds:2,Hearts:3,Spades:4});
+    Card.Rank = enumeration({Two:2,Three:3,Four:4,Five:5,Siz:6,Seven:7,Eight:8,Nine:9,Ten:10,Jack:11,Queen:12,King:13,Ace:14});
+    Card.prototype.toString = function () {
+        return this.rank.toString()+"of"+this.suit.toString();
+    };
+    Card.prototype.compareTo = function (that) {
+        if(this.rank<that.rank) return -1;
+        if(this.rank>that.rank) return 1;
+        return 0;
+    };
+
+    Card.orderByRank = function(a,b){
+        return a.compareTo(b);
+    }
+    Card.orderBySuit = function(a,b){
+        if(a.suit<b.suit) return -1;
+        if(a.suit<b.suit) return 1;
+        if(a.rank<b.rank) return -1;
+        if(a.rank<b.rank) return 1;
+        return 0;
+    };
+    //定义表示一副标准扑克牌的类
+    function Deck(){
+        var cards = this.cards=[]; //一副牌就是由牌组成的数组
+        Card.Suit.foreach(function(s){
+            Card.Rank.foreach(function(r){//初始化数组
+                cards.push(new Card(s,r));
+            });
+        });
+    }
+    //重新洗牌
+    Deck.prototype.shuffle = function () {
+        var deck = this.cards,len=deck.length;
+        for(var i=len-1;i>0;i--){
+            var r = Math.floor(Math.random()*(i+1)),temp;
+            temp = deck[i],deck[i]=deck[r],deck[r]=temp;
+        }
+        return this;
+    };
+
+    //返回牌的数组
+    Deck.prototype.deal = function (n) {
+        if(this.cards.length<n)throw "out of cards";
+        return this.cards.splice(this.cards.length-n,n);
+    };
+    var deck = (new Deck()).shuffle(); //洗牌有必要
+    var deck2 = (new Deck());
+    var hand = deck.deal(3).sort(Card.orderBySuit);
+   console.log(hand);
+</script>
+</body>
+</html>

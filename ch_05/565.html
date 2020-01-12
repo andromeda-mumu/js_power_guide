@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>异常</title>
+</head>
+<body>
+<script>
+    try{
+        var n = Number(prompt("请输入一个整数"));
+        var f = factorial(n);
+        alert(n+"!="+f);
+    }catch (e) {
+        alert(e)
+    }finally {
+        console.log("ff");
+        console.log();
+
+    }
+</script>
+</body>
+</html>

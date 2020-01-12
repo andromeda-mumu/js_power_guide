@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>全局eval</title>
+</head>
+<body>
+<script>
+    var geval = eval;
+    var x="global",y="global";
+    function f() {
+        var x ="local";
+        eval("x +='changed';");
+        return x;
+    }
+    
+    function g() {
+        var y="local";
+        geval("y +='chenged';");
+        return y;
+    }
+    console.log(f(),x);
+    console.log(g(),y);
+</script>
+</body>
+</html>

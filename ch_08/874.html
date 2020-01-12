@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>bind方法</title>
+</head>
+<body>
+<script>
+    var sum = function (x,y) {
+        return x+y;
+    }
+    var succ=sum.bind(null,1);
+    console.log(succ(3));
+    console.log("----------------");
+    function f(y,z){return this.x+y+z;}
+    var g= f.bind({x:1},2);
+    console.log(g(3));
+    console.log("----------------");
+    if(!Function.prototype.bind){
+        Function.prototype.bind = function (o/*,args*/) {
+            var self =this,boundArgs = arguments;
+            return function () {
+                var args =[],i;
+                for(i=0;i<boundArgs.length;i++)args.push(boundArgs[i]);
+                for(i=0;i<arguments.length;i++)args.push(arguments[i]);
+                return self.apply(o,args);
+            };
+        };
+    }
+    
+    console.log(Function.prototype.bind([1,2,3])());
+</script>
+</body>
+</html>

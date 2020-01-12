@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>继承</title>
+</head>
+<body>
+<script >
+    function inherit(p) {
+        if(p==null) throw TypeError;
+        if(Object.create){
+            return Object.create(p);
+        }
+        var t = typeof p;
+        if(t!="object" && t!="function")throw TypeError;
+        function f() {
+        };
+        f.prototype =p;
+        return new f();
+    }
+    var o={};
+    o.x=1;
+    var p=inherit(o);
+    p.y=2;
+    var q=inherit(p);
+    q.z=3;
+    var s= q.toString();
+    q.x =5;
+    console.log(o.x);
+
+    console.log(q.x+q.y);
+    console.log(q.x);
+    
+    console.log("----------------");
+    var c= {r:1};
+    var cc =inherit(c);
+    cc.x=1;
+    cc.y=1;
+    cc.r=3;
+    console.log(c.r);
+    console.log(cc.x+""+cc.y+""+cc.r);
+
+</script>
+</body>
+</html>

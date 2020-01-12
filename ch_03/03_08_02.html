@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>显示类型转换</title>
+</head>
+<body>
+<script>
+    console.log(Number(3));
+    console.log(String(false));
+    console.log(Boolean([]));
+    console.log(Object(3));
+    console.log("a".toString());
+    console.log(Number(undefined));
+    console.log(Object(undefined));
+    
+    var x=10;
+    console.log(x+"");
+    console.log(+x);
+    console.log(!!x);
+    console.log("----------------");
+    var n=17;
+    console.log(n.toString(2));
+    console.log("0"+n.toString(8));
+    console.log("0x"+n.toString(16));
+    
+    console.log("----------------");
+    var n = 123456.789;
+    console.log(n.toFixed(0));
+    console.log(n.toFixed(2));
+    console.log(n.toFixed(5));
+    console.log("----------------");
+    console.log(n.toExponential(1));
+    console.log(n.toExponential(3));
+    console.log(n.toExponential(10));
+    console.log("----------------");
+    console.log(n.toPrecision(4));
+    console.log(n.toPrecision(7));
+    console.log(n.toPrecision(10));
+    console.log("----------------");
+    
+    console.log(parseInt("3 ddd rr"));
+    console.log(parseInt("  3.24 mett"));
+    console.log(parseInt("-23.33"));
+    console.log(parseInt("0xFF"));
+    console.log(parseInt("-0xFF"));
+    console.log(parseFloat(".1"));
+    console.log(parseInt("0.1"));
+    console.log(parseInt(".1"));
+    console.log(parseFloat("$75.34"));
+    
+    console.log("----------------");
+    console.log(parseInt("11",2));
+    console.log(parseInt("ff",16));
+    console.log(parseInt("zz",36));
+    console.log(parseInt("077",8));
+    console.log(parseInt("077",10));
+</script>
+</body>
+</html>

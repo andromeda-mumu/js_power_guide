@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>解构赋值</title>
+</head>
+<body>
+<script>
+    // let [x,y]=[1,2];
+    // [x,y] =[x+1,y+1];
+    // [x,y]=[y,x];
+    // console.log([x,y]);
+    
+    // console.log("-----将直角坐标转换成极坐标--------");
+    // function polar(x,y) {
+    //     return[Math.sqrt(x*x+y*y),Math.atan2(y,x)];
+    // }
+    // function cartesian(r,theta) {
+    //     return [r*Math.cos(theta),r*Math.sin(theta)];
+    // }
+    // let [r,theta]=polar(1.0,1.0);
+    // console.log([r,theta]);
+    // let [x,y] = cartesian(r,theta);
+    //
+    // console.log(x,y);
+    // console.log([x,y]);
+    
+    console.log("----------------");
+    let [x,y]=[1];
+    console.log(x,y);
+    [x,y] =[1,2,3];
+    console.log(x,y);
+    [,x,,y] =[1,2,3,4]
+    console.log(x,y);
+    
+    console.log("------------");
+    let first,second,all;
+    all =[first,second]=[1,2,3,4];
+    console.log(first,second,all);
+    
+    console.log("-----嵌套--------");
+    let [one,[twoA,twoB]] =[1,[2,2.5],3];
+    console.log(one,twoA,twoB);
+    
+    console.log("----------------");
+    let transparent = {r:0.0,g:0.0,b:0.0,a:1.0};
+    let {r:red,g:green,b:blue}=transparent;
+    console.log(red,green,blue);
+    
+    console.log("-----嵌套对象--------");
+    let data ={
+        name:"mmc",
+        type:"extension",
+        impl:[{engine:"spidermonkey",version:1.7},{engine:"rhino",version:1.7}]
+    };
+    //使用解构函数从数据结构中提取4个值
+    let {name:feature}=data;
+    let {impl:[{engine:impl1,version:v1},{engine:impl2}]}=data;
+    console.log(feature);
+    console.log(impl1,impl2,v1);
+</script>
+</body>
+</html>

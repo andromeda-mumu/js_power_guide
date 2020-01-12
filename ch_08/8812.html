@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数处理数组</title>
+</head>
+<body>
+<script>
+    var map = Array.prototype.map
+        ?function(a,f){return a.map(f);}
+        :function(a,f){
+        var result =[];
+        for(var i=0,len=a.length;i<len;i++){
+          if(i in a) result[i]=f.call(null,a[i],i,a);
+        }
+        return result;
+    }
+
+    var reduce = Array.prototype.reduce
+        ? function (a,f,initial){
+            if(arguments.length>2){
+                return a.reduce(f,initial);
+            }else{
+                return a.reduce(f);
+            }
+             }
+        : function (a,f,initial) {
+            var i=0,len=a.length,accumulator;
+            if(arguments.length>2)accumulator = initial;
+            else {
+                if(len==0 )throw TypeError();
+                while(i<len){
+                    if(i in a){
+                        accumulator =a[i++];
+                        break;
+                    }else i++;
+                }
+                if(i==len) throw TypeError();
+            }
+            while(i<len){
+                if(i in a){
+                    accumulator =f.call(undefined,accumulator,a[i],i,a);
+                }
+                i++;
+            }
+            return accumulator;
+        };
+
+    console.log("------高阶函数实操----------");
+    function mapper(f) {
+        return function (a) {
+            return map(a,f);
+        }
+    }
+    var increment = function (x) {
+        return x+1;
+    }
+    var incrementer = mapper(increment);
+    console.log(incrementer([1,2,3]));
+
+</script>
+</body>
+</html>

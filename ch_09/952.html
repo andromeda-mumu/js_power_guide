@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>constructor属性</title>
+</head>
+<body>
+<script>
+    function typeAndValue(x) {
+        if(x==null) return "";
+        switch (x.constructor) {
+            case Number:return "Number:"+x;
+            case String:return "String:"+x;
+            case Date:return "Date:"+x;
+            case RegExp:return "regExp:"+x;
+            case Complex:return "Complex:"+x;
+        }
+    }
+    console.log(typeAndValue("haha"));
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>日期与时间</title>
+</head>
+<body>
+<script>
+    var then = new Date(2011,0,1);
+    var later=new Date(2011,0,1,17,30,10);
+    var now = new Date();
+    var mill = later-then;
+    console.log(then);
+    console.log(later);
+    console.log(now);
+    console.log(mill);
+    console.log("----------");
+    console.log(later.getFullYear());
+    console.log(later.getMonth());
+    console.log(later.getDate());
+    console.log(later.getDay());
+    console.log(later.getHours());
+    console.log(later.getUTCHours());
+
+</script>
+</body>
+</html>

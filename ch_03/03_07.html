@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原始值与对象引用</title>
+</head>
+<body>
+<script>
+    var s="hello";
+    s.toUpperCase();
+    console.log(s);
+
+    var o={x:1};
+    o.x=2;
+    o.y=3;
+
+    var a=[1,2,4];
+    a[0]=2;
+    a[3]=3;
+
+    var o1={x:1},o2={x:1}
+    console.log(o1===o2);
+
+    var a=[],b=[];
+    console.log(a===b);
+    
+    var arr=[];
+    var arr2=arr;
+    arr[0]=1;
+    console.log(arr2[0]);
+    console.log(arr===arr2);
+    
+    var a=['a','b','c'];
+    var b=[];
+    for(var i=0;i<a.length;i++){
+        b[i]=a[i];
+    }
+    console.log(b);
+    
+    function equalArr(a,b) {
+        if(a.length!=b.length)return false;
+        for(var i=0;i<a.length;i++){
+            if(a[i]!=b[i])return false;
+        }
+        return true;
+    }
+    console.log(equalArr(a,b));
+
+
+</script>
+
+</body>
+</html>

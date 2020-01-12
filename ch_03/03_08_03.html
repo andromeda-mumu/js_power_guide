@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>对象转换成原始类型</title>
+</head>
+<body>
+<script>
+    console.log({x:1,y:2}.toString());
+    console.log([1,2,3].toString());
+    console.log((function (x) {
+        f(x);
+    }).toString());
+    console.log(/\d+/g.toString());
+    console.log(new Date().toString());
+    console.log("----------------");
+    console.log(new Date().valueOf());
+    console.log("----------------");
+    console.log(["2"].valueOf());
+    console.log(["2"].toString());
+    console.log("----------------");
+    
+    var now = new Date();
+    console.log(typeof (now+1));
+    console.log(now+1);
+    console.log(typeof (now -1));
+    console.log(now-1);
+    console.log(now == now.toString());
+    console.log(now > (now-1));
+    
+</script>
+</body>
+</html>

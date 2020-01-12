@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Function构造函数</title>
+</head>
+<body>
+<script>
+    var scope = "global";
+    function construct() {
+        var scope ="local";
+        return new Function("return scope");
+    }
+    console.log(construct()());
+
+</script>
+</body>
+</html>

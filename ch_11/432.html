@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function* counter(init) {
+        let nextvalue = init;
+        while (true){
+            try{
+                let increment = yield  nextvalue;
+                if(increment)
+                    nextvalue+=increment;
+                else nextvalue++;
+            }catch(e){
+                if(e === "reset")
+                    nextvalue = init;
+                else throw e;
+            }
+        } 
+    }
+    
+    let c= counter(10);
+    console.log(c.next());
+    console.log(c.send(2));
+    console.log(c.throw("reset"));
+</script>
+</body>
+</html>

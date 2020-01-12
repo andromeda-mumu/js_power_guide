@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>一个生成器管道</title>
+</head>
+<body>
+<script>
+    //每次产生一行字符串s
+    function* eachline(s) {
+        let p;
+        while ((p=s.indexOf('\n'))!=-1){
+            yield s.substring(0,p);
+            s = s.substring(p+1);
+        } 
+        if(s.length>0) yield s;
+    }
+    //一个生成器函数，对于每个可迭代的i的每个元素x，都会产生一个f(x)
+    function* map(i,f){
+        for(let x in i) yield f(x);
+    }
+    //一个生成器函数，针对每个结果为true的f(x)，为i生产一个元素
+    function* select(i,f) {
+        for(let x in i){
+            if(f(x)) yield x ;
+        }
+    }
+    //准备处理这个字符串
+    let text = "#comment \n \n hello \nworld\n quit \n unreached \n";
+    //创建一个生成器管道处理它
+    //首先，将文本分割成行
+    let lines = eachline(text);
+    console.log(lines);
+    //去掉行首和行位的空格
+    let trimmed = map(lines,function (line) {
+        return line.trim();
+    });
+    console.log(trimmed);
+    //忽略空格和注释
+    let nonblank = select(trimmed,function (line) {
+        return line.length>0 && line[0] !="#"
+    });
+    console.log(nonblank);
+    //现在从管道中取出经过删减和筛选后的行对其进行处理
+    for(let line in nonblank){
+        if(line === "quit") break;
+        console.log(line);
+    }
+</script>
+</body>
+</html>

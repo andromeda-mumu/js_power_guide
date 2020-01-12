@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>类工厂和方法链</title>
+</head>
+<body>
+<script>
+    /**
+     * 这函数返回具体的set的子类
+     * 并重写add方法，用以对添加的元素做特殊过滤
+     */
+    function filteredSetSubclass(superclass,filter){
+        var constructor =function () {//子类构造函数
+            superclass.apply(this,arguments);
+        };
+        var proto = constructor.prototype = inherit(superclass.prototype);
+        proto.constructor = constructor;
+        proto.add = function () {
+            for(var i=0;i<arguments.length;i++){
+                var v= arguments[i];
+                if(!filter(v))throw ("value "+v+" rejected by filter ");
+            }
+            superclass.prototype.add.apply(this,arguments);
+        };
+        return constructor;
+    }
+    var NonNullSet = (function () {
+        var superclass= Set;
+        return superclass.extend(
+            function () {
+                superclass.apply(this,arguments);
+            },
+            {
+                add:function () {
+                    for(var i=0;i<arguments.length;i++){
+                        if(arguments[i]==null)throw new Error("can't add null undefined ");
+                    }
+                    return superclass.prototype.add.apply(this,arguments);
+                }
+        });
+    }());
+
+
+</script>
+</body>
+</html>

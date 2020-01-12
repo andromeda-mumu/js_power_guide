@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>关联数组的对象</title>
+</head>
+<body>
+<script>
+    var customer={address1:"a",address2:"b","address3":"c"};
+    var addr="";
+    for(var i=0;i<4;i++){
+        addr += customer["address"+i]+"\n";
+    }
+    console.log(addr);
+
+    console.log("----------------");
+    function getValue(student) {
+        var total =0.0;
+        for(s in student){
+            var pre = student[pre];
+            var fen = student[s];
+            total +=pre*fen;
+        }
+        return total;
+    }
+    var student = {
+        pre:2,
+        s:90
+    }
+
+    console.log(getValue(student));
+</script>
+</body>
+</html>
