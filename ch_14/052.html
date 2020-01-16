@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模式对话框</title>
+</head>
+<form>
+    <fieldset id="fields"></fieldset>
+    <div style="text-align:center">
+        <button onclick="okey()">ok</button>
+        <button onclick="cancel()">cancel</button>
+    </div>
+    <script>
+        var args = dialogArguments;
+        var text = "<label>"+args[0]+"</label>";
+        for(var i=0;i<args.length;i++){
+             text +="<label>"+args[i]+":<input id='f"+i+"'></label><br>"
+        }
+        document.getElementById("fields").innerHtml=text;
+        function cancel() {
+            window.close();
+        }
+        function okey() {
+            window.returnValue=[];
+            for(var i=0;i<args.length;i++){
+                window.returnValue[i-1]=document.getElementById("f"+i).value;
+            }
+            window.close();
+        }
+        
+    </script>
+</form>
+<body>
+</body>
+</html>

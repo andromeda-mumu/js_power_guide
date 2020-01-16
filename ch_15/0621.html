@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表格的行排列</title>
+</head>
+<body>
+<script>
+    function sortrows(table,n,comparator) {
+        var tbody = table.tBodies[0];
+        var rows = tbody.getElementsByTagName("tr");
+        rows = Array.prototype.slice.call(rows,0);
+        rows.sort(function (row1,row2) {
+            var cell1 = row1.getElementsByTagName("td")[n];
+            var cell2 = row2.getElementsByTagName("td")[n];
+            var val1=cell1.textContent || cell1.innerText;
+            var val2= cell2.textContent||cell2.innerText;
+            if(comparator)return comparator(val1,val2);
+            if(val1<val2) return -1;
+            else if(val1>val2)return 1;
+            else return 0;
+        });
+        //在tbody中按照它们的顺序把行添加到最后
+        for(var i=0;i<rows.length;i++){
+            tbody.appendChild(rows[i]);
+        }
+    }
+    //查找表格<th>元素，让它们可点击
+    function makeSortable(table) {
+        var header= table.getElementsByTagName("th");
+        for(var i=0;i<header.length;i++){
+            (function (n) {//嵌套函数创建本地作用域
+                header[i].onclick=function () {
+                    sortrows(table,n);
+                }
+            }(i));//将I赋值给局部变量n
+        }
+    }
+</script>
+</body>
+</html>

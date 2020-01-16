@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>documentFragment</title>
+</head>
+<body>
+<script>
+    //倒序排列节点n的子节点
+    function reverse(n) {
+        //创建一个documentFragment作为零食容器
+        var f =document.createDocumentFragment();
+        //从后到前循环子节点，将每个子节点移动到文档片段中
+        //n的最后一个节点，变成f的第一个节点
+        //注意：非f添加一个节点，该节点自动会从n中删除
+        while(n.lastChild) f.appendChild(n.lastchild);
+        //最后把f的所有子节点一次性的全部移回n中
+        n.appendChild(f);
+    }
+</script>
+</body>
+</html>

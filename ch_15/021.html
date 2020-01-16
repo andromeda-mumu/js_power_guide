@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>通过Id查找元素</title>
+</head>
+<body id="bb">
+<script>
+    function getElements(/*ids...*/) {
+       var elements ={};
+       for(var i=0;i<arguments.length;i++){
+            var id =arguments[i];
+            var elt = document.getElementById(id);
+            if(elt==null)
+                throw new Error("No element with id: "+id);
+            elements[id] =elt;
+       }
+       return elements;
+    }
+    console.log(getElements("bb"));
+</script>
+</body>
+</html>

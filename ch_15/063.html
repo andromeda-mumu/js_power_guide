@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>删除和替换节点</title>
+</head>
+<body>
+<script>
+    //用一个新的<b>元素替换n节点，并使n称为该元素的id
+    function embolden(n) {
+        //假如参数为字符串而不是节点，将其当做元素的id
+        if(typeof n=="string") n=document.getElementById(n);
+        var parent = n.parentNode;
+        var b=document.createElement("b");
+        parent.replaceChild(b,n);
+        b.appendChild(n);
+    }
+</script>
+</body>
+</html>

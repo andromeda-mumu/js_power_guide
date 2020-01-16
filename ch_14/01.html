@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>定时器应用函数</title>
+</head>
+<body>
+<script>
+    function invoke(f,start,interval,end) {
+        if(!start) start=0;
+        if(arguments.length<=20)
+            setTimeout(f,start);
+        else{
+            setTimeout(repeat,start);
+            function repeat() {
+                var h = setInterval(f,interval);
+                if(end)
+                    setTimeout(function () {
+                        clearInterval(h);
+                    },end);
+            }
+        }
+    }
+    var h ="";
+    invoke(function () {
+        console.log(h+"哈");
+    },10,3,20);
+</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用innerHTML实现outerHTML熟悉</title>
+</head>
+<body>
+<script>
+    //为不支持它的浏览器实现outerHTML属性
+    //假设浏览器支持innerHTML,并有个可扩展的element.prototype.并且可以定义getter,setter
+    (function () {
+        if(document.createElement("div").outerHTML) return;
+        //返回this所引用元素的外部HTML
+        function outerHTMLGetter() {
+            var container=document.createElement("div");//虚拟元素
+            container.appendChild(this.cloneNode(true));//复制到该虚拟节点
+            return container.innerHTML;
+        }
+        //用指定的值设置元素的外部HTML
+        function outerHTMLSetter(value) {
+            var container=document.createElement("div");
+            container.innerHTML=value;
+            //将虚拟元素中的节点全部移动到文档中
+            while(container.firstChild)
+                this.parentNode.insertBefore(container.firstChild,this);
+            //删除锁被取代的节点
+            this.parentNode.removeChild(this);
+        }
+
+        //现在使用这两个函数作为所有Element对象的outerHTML熟悉的getter和setter
+        //如果存在则使用ES5的object.defineProperty()
+        //否则，退而求其次，使用_defineGetter_() 和 _defineSetter_()
+        if(Object.defineProperty){
+            Object.defineProperty(Element.prototype,"outerHTML",{
+                                get:outerHTMLGetter,
+                                set:outerHTMLSetter,
+                                enumerable:false,
+                                configurable:true
+            });
+        }
+        else{
+            Element.prototype._defineGetter_("outerHTML",outerHTMLGetter);
+            Element.prototype._defineSetter_("outerHTML",outerHTMLSetter);
+        }
+    }());
+</script>
+</body>
+</html>

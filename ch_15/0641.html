@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用innerHTML实现insertAdjacentHTML</title>
+</head>
+<body>
+<script>
+    var Insert = (function () {
+        //如果元素有原生的insertAdjacentHTML
+        //在4个函数名更明了的HTML插入函数肿使用它
+        if(document.createElement("div").insertAdjacentHTML){
+            return {
+                before:function(e,h){e.insertAdjacentHTML("beforebegin",h);},
+                after:function(e,h){e.insertAdjacentHTML("afterend",h);},
+                atStart:function(e,h){e.insertAdjacentHTML("afterbegin",h);},
+                atEnd:function(e,n){e.insertAdjacentHTML("beforeend",h);}
+            };
+        }
+        //否则，没有原生的insertAdjacentHTML
+        //自己实现这4个插入函数，并使用他们来定义insertAdjacentHTML
+        //定义一个工具函数，传入HTML字符串，返回一个DocumentFragment.
+        function fragemnt(html) {
+            var elt = document.createElement("div");//创建空元素
+            var frag = document.createDocumentFragment();//创建空文档片段
+            elt.innerHTML=html;
+            while (elt.firstChild)
+                frag.appendChild(elt.firstChild);
+            return frag;
+        }
+        var Insert={
+            before:function (elt,html) {
+                elt.parentNode.insertBefore(fragemnt(html),elt);
+            },
+            after:function (elt,html) {
+                elt.parentNode.insertBefore(fragemnt(html),elt.nextSibling);
+            },
+            atStart:function (elt,html) {
+                elt.insertBefore(fragemnt(html),elt.firstChild);
+            },
+            atEnd:function (elt,html) {
+                elt.appendChild(fragemnt(html));
+            }
+        };
+        //基于以上函数实现insertAdjacentHTML
+        Element.prototype.insertAdjacentHTML=function (pos,html) {
+            switch (pos.toLowerCase()) {
+                case "beforebegin":return Insert.before(this,html);
+                case"afterend":return Insert.after(this,html);
+                case "afterbegin":return Insert:atStart(this,html);
+                case"begoreend":return Insert.atEnd(this,html);
+            }
+        };
+        return Insert;//返回四个插入函数
+    }());
+</script>
+</body>
+</html>

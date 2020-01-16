@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件驱动</title>
+</head>
+<body>
+<script>
+    function onLoad(f) {
+        if(onLoad.load)
+            window.setTimeout(f,0);
+        else if(window.addEventListener)
+            window.addEventListener("load",f,false);
+        // else if(window.attachEvent)
+        //     window.attachEvent("onLoad",f);
+    }
+    onLoad.loaded =false;
+    onLoad(function () {
+        onLoad.loaded = true
+        console.log(onLoad.loaded);
+    })
+</script>
+</body>
+</html>
