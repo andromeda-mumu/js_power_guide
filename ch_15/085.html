@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>元素位置</title>
+</head>
+<body>
+<p>hhhh</p>
+<p>xixixi</p>
+<script>
+    // function getElementPosition(e) {
+    //     var x=0,y=0;
+    //     while(e!=null){
+    //         x +=e.offsetLeft;
+    //         y += e.offsetTop;
+    //         e =e.offsetParent;
+    //     }
+    //     return {x:x,y:y};
+    // }
+    
+    console.log("----把滚动条的偏移量计算进去-返回视口坐标------");
+    function getElementPos(elt) {
+        var x=0,y=0;
+        for(var e=elt;e!=null;e =e.offsetParent){
+            x +=e.offsetLeft;
+            y +=e.offsetTop;
+        }
+        for(var e=elt.parentNode;e!=null && e.nodeType==1;e=e.parentNode){
+            x -=e.scrollLeft;
+            y -=e.scrollTop;
+        }
+        return {x:x,y:y};
+    }
+    
+    var {x,y} = getElementPos(document.getElementsByTagName("p")[1]);
+    console.log(x,y);
+</script>
+</body>
+</html>

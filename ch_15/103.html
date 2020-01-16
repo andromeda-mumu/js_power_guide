@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>查询选取的文本</title>
+</head>
+<body>
+<a href="javascript: var q;
+        if(window.getSelection) q=window.getSelection().toString();
+        else if(document.selection) q=document.selection.createRange().text;
+        void window.open('http://en.wikipedia.org/wiki/'+q);">look up selected text in wikipedia</a>
+<script>
+    function getSelectedText() {
+        if(window.getSelection())
+            return window.getSelection().toString();
+        else if(document.selection)
+            return document.selection.createRange().text;
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选取表单和表单元素</title>
+</head>
+<body>
+<form name="shipping">
+    <fieldset>
+        <legend>Shipping Method</legend>
+        <label><input type="radio" name="method" value="1st"> First -class</label>
+        <label><input type="radio" name="method" value="2day">2-day Air</label>
+        <label><input type="radio" name="method" value="overnite" checked>Overnight</label>
+    </fieldset>
+</form>
+<script>
+    // var fields=document.getElementById("address").getElementsByTagName("iput");
+    // document.querySelectorAll('#shipping input[type="radio"]');
+    // document.querySelectorAll('#shipping input[type="radio"][name="method"]');
+    //
+    //
+    // //通过不同方式获得name="address" 属性的<form>
+    // window.address
+    // document.address;
+    // document.forms.address;
+    // document.forms[n];
+    // document.forms.address[0];
+    // document.forms.address.street;
+    // document.address.street;
+    //
+    // document.forms.address.elements[0]
+    // document.forms.address.elements.streer;
+    //
+    var methods = document.forms.shipping.elements.method;
+    console.log(methods);
+    
+    var shipping_method;
+    for(var i=0;i<methods.length;i++){
+        if(methods[i].checked) 
+            shipping_method =methods[i].value;
+    }
+    console.log(shipping_method);
+    
+</script>
+</body>
+</html>

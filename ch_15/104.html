@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>可编辑的内容</title>
+</head>
+<body>
+<div id="editor" contenteditable="">
+    click to edit
+</div>
+<iframe id="ee" src="about:blank"></iframe>
+<script>
+    onLoad(function () {
+        var editor =document.getElementById("ee");
+        editor.contentDocument.designMode="on";  //谷歌不兼容  无法编辑
+    })
+
+    function bold() {
+        document.execCommand("bold",false,url);
+    }
+    function link() {
+       var url = prompt("enter link destination");
+       if(url) document.execCommand("createlink",false,url);
+    }
+    link();
+</script>
+</body>
+</html>

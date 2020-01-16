@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>查询元素的几何尺寸</title>
+</head>
+<body>
+<script>
+    var documentHeight = document.documentElement.offsetHeight;
+    var viewportHeight = window.innerHeight;
+    window.scrollTo(0,documentHeight-viewportHeight);
+
+    javascript:void setInterval(function () {
+        scrollBy(0,10)
+    },200);
+
+</script>
+</body>
+</html>

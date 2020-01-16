@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文档和元素的几何形状和滚动：查询滚动条的位置</title>
+</head>
+<body>
+<script>
+    function getScrollOffsets(w) {
+        w =w||window;
+        if(w.pageXOffset!=null)
+            return {x:w.pageXOffset,y:w.pageYOffset};
+        var d= w.document;
+        if(document.compatMode=="CSS1Compat")
+            return {x:d.documentElement.scrollLeft,y:d.documentElement.scrollTop};
+        return {x:d.body.scrollLeft,y:d.body.scrollTop};
+    }
+    var {x,y}=getScrollOffsets();
+    console.log(x,y);
+</script>
+</body>
+</html>

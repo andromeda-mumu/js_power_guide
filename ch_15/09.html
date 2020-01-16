@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML表单</title>
+</head>
+<body>
+<script>
+    var methods = document.forms.shipping.elements.method;
+    var shipping_method;
+    for(var i=0;i<methods.length;i++){
+        if(methods[i].checked) shipping_method =methods[i].value;
+    }
+
+
+</script>
+
+</body>
+</html>

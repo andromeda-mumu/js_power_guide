@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>document.write</title>
+</head>
+<body>
+<h1 id="one">标题</h1>
+<script>
+    document.write("<p>Document title:"+document.title);
+    document.write("<br>URL:"+document.URL);
+    document.write("<br>Referred by:"+document.referrer);
+    document.write("<br>Modiffied on:"+document.lastModified);
+    document.write("<br>Accessed on:"+new Date());
+
+    console.log("-----针对innerHTML属性的流式API------");
+    function ElementStream(elt) {
+        if(typeof  elt==="string") elt =document.getElementById(elt);
+        this.elt = elt;
+        this.buffer ="";
+    }
+    ElementStream.prototype.write =function () {
+        this.buffer +=Array.prototype.join.call(arguments,"")+"\n";
+    };
+    ElementStream.prototype.close = function () {
+        this.elt.innerHTML=this.buffer;
+        this.buffer="";
+    };
+    var elr = new ElementStream("one");
+    elr.write("我是添加的内容啊");
+    elr.close();
+
+
+
+</script>
+</body>
+</html>
