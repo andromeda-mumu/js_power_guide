@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>URL中的javas</title>
+</head>
+<body>
+<!--<a href="javascript:new Date().toLocaleTimeString()">what time is it?</a>-->
+<!--<a href="javascript:alert(new Date().toLocaleTimeString())">-->
+<!--    检查时间，不必覆盖整个文档内容-->
+<!--</a>-->
+<!--<a href="javascript: void window.open('about:blank');">打开一个新窗口</a>-->
+<a href='javascript:
+    var e = "",r="";
+    do{
+        e =prompt("Expression: "+e+"\n"+r+"\n",e);
+        try{
+            r ="result: "+eval(e);
+        }catch(e){
+            r=e;
+        }
+    }while(e);
+    void 0;
+    '>
+    JavaScript Evaluator</a>
+</body>
+</html>

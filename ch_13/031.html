@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>载入时生成文档内容</title>
+</head>
+<body>
+<h1>Table of Factorials</h1>
+<script>
+    function factorials(n) {
+        if(n<=1) return n;
+        else return n*factorials(n-1);
+    }
+    document.write("<table>");
+    document.write("<tr><td>"+i+"</td></tr>");
+    for(var i=0;i<=10;i++){
+                document.write("<tr></tr>"+i+"</td></tr>");
+    }
+    document.write("</table>");
+    document.write("Generated at "+new Date());
+
+    console.log("-----异步载入和执行--------");
+    function loadAsync(url) {
+     var head = document.getElementsByTagName("head")[0];
+     var s= document.createElement("script");
+     s.src =url;
+     head.appendChild(s);
+    }
+</script>
+</body>
+</html>
