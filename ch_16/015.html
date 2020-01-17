@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>css举例</title>
+    <style type="text/css">
+        /*指定标题文本显示为蓝色，斜体*/
+        h1,h2{color:blue;font-style: italic}
+        /*任何class=WARNING 的元素显示为大号，加黑文本
+        它有很宽的外边距 黄色背景 宽的红色边框
+        */
+        .WARNING{
+            font-weight:bold;
+            font-size:150%;
+            margin:0 1in 0 1in;
+            background-color: yellow;
+            border: solid red 8px;
+            padding: 10px;
+        }
+        /*
+        class=WARNING的元素 里面的h1或h2标签内的文本  除了蓝色，还应该居中显示
+        */
+        .WARNING h1,.WARNING h2{text-align:center}
+        /*id=special 的元素大写，居中显示*/
+        #special{
+            text-align: center;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+<h1>CSS demo</h1>
+<div class="WARNING">
+    <h2>warning</h2>
+    this is a warning!
+    notice how it grabs your attention with its bold text and bright
+    
+</div>
+<p id="special">
+this paragraph is centered<br>
+and appears in uppercase letters<br>
+<span style="text-transform: none">
+here we explicitly use an inline style to override the uppercase letters
+    </span>
+</p>
+
+<div style="position:relative;left: 0px;top: 0px;">
+    hello hello
+</div>
+<div style="position: absolute;right: 0px;bottom: 0px;">botom bottom</div>
+<div style="position: fixed;right: 10px;bottom: 10px;">botom bottom22222222222</div>
+<div style="position: absolute; top: 10px; left: 10px; width: 10px;height: 10px;background-color: blue"></div>
+<div style="position: absolute; left: 25%; top: 25%;width: 50%;height: 50%; border: 2px solid black;"></div>
+<span style="text-shadow: 3px 3px 1px #888"> shadowed</span>
+<!--利用定位实现阴影的效果-->
+<span style="position: relative;">
+    shadowed
+    <span style="position: absolute;top: 3px;left: 3px; z-index: -1;color: #888;">shadowed</span>
+</span>
+<div style="box-sizing:border-box;width: 50%;padding: 10px;border: solid black 2px;"></div>
+<div style="opacity: .15;width:calc(50%- 12px);padding: 10px;border:solid black 2px;"></div>
+<div style="clip: rect(0px 100px 100px 0px);background-color: #f0f;"></div>
+</body>
+</html>
