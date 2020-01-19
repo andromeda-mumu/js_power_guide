@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>设置js对象属性为事件处理程序</title>
+</head>
+<body>
+<script>
+    window.onLoad=function () {
+        var elt = document.getElementById("shipping_address");
+        elt.onsubmit = function () {
+            return validate(this);
+        }
+    }
+
+</script>
+</body>
+</html>
