@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用css显示窗口</title>
+    <style type="text/css">
+        div.window{
+            /*position 在其他地方指定*/
+            position: absolute;
+            width:300px;
+            height: 200px; /*不含边框*/
+            border: 3px outset gray; /*3D outset 效果*/
+        }
+        div.titlebar{
+            /*指定标题栏的定位，尺寸和样式*/
+            position: absolute;
+            top: 0px;
+            height: 18px;
+            width: 290px;
+            background-color: #aaa;
+            border-bottom: groove gray 2px; /*只有底部边框*/
+            padding: 3px 5px 2px 5px ;
+            font: bold 11pt sans-serif;
+        }
+        div.content{
+            /*指定窗口内容的尺寸，定位和滚动*/
+            position: absolute; /*定位元素*/
+            top: 25px; /**/
+            height: 165px;
+            width: 90px;
+            padding: 5px;
+            overflow: auto;
+            background-color: #fff;
+        }
+        div.translucent{
+            /*窗口部分透明*/
+            opacity: .75;
+            filter:alpha(opacity=75);
+        }
+    </style>
+</head>
+<body>
+<!--定义一个窗口：window div有一个标题栏和其内 是一个内容div。注意，如何设置定位，一个扩充了样式表的style属性-->
+<div class="window" style="left:100px;top:10px;z-index: 10;">
+    <div class="titlebar">TEST WINDOW</div>
+    <div class="content">
+        1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>
+        1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>
+        1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>
+    </div>
+<!--定义另一个窗口，用不同的定位 颜色 和 字体重量-->
+    <div class="window" style="left: 75px; top: 110px;z-index: 20;"></div>
+    <div class="titlebar">Another Window</div>
+    <div class="content translucent" style="background-color: #ff00ff;font-weight: bold;">
+        this is another window. Its <tt>z-index</tt> puts it on top of the other one
+        css style make its content area translucent .in browsers that support that.
+    </div>
+</div>
+</body>
+</html>

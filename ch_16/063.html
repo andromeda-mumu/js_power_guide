@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>创建新样式表</title>
+</head>
+<body>
+<script>
+    //属性名即为 选择器 ，其值即为对应的样式
+    function addStyle(styles) {
+        //首先创建一个新样式表
+        var styleElt,styleSheet;
+        if(document.createStyleSheet){
+            styleSheet = document.createStyleSheet();
+        }else{
+            var head =document.getElementsByTagName("head")[0];
+            styleElt = document.createElement("style");//新的<style>元素
+            head.appendChild(styleElt);
+            //现在，新的样式表应该是最后一个
+            styleSheet = document.styleSheets[document.styleSheets.length];
+        }
+        //现在向其中插入样式
+        if(typeof styles ==="string"){
+            //参数是样式表文本
+            if(styleElt) styleElt.innerHTML =styles;
+            else styleSheet.cssText =styles ;//IE API
+        }else{
+            //参数时 待插入的 单独的规则对象
+            var i=0;
+            for(selector in styles){
+                if(styleSheet.insertRule){
+                    var rule = selector+"{"+styles[selector]+"}";
+                    styleSheet.inserRule(rule,i++);
+                }else{
+                    styleSheet.addRule(selector,styles[selector],i++);
+                }
+            }
+        }
+
+    }
+</script>
+</body>
+</html>

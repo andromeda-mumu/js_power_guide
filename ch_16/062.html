@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>查询 插入与 删除样式表规则</title>
+</head>
+<body>
+<script>
+    var ss =document.styleSheets[0];//得到第一个样式表
+    var rules = ss.cssRules?ss.cssRules:ss.rules; //得到样式规则
+    for(var i=0;i<rules.length;i++){
+       var rule =rules[i];
+       if(!rule.selectorText) continue ;//跳过@import 和 非样式规则
+        var selector = rule.selectorText; //选择器
+        var ruleText = rule.style.cssText; //文本形式的样式
+        //如果规则应用在h1,也将其应用到h2元素中
+        //注意：仅当选择器在字面上为 h1 时，这才起作用
+        if(selector =="h1"){
+            if(ss.insertRule) ss.insertRule("h2 {"+ruleText+"}",rules.length);
+            else if(ss.addRule) ss.addrule("h2",ruleText,rules.length);
+        }
+        //如果规则设置了text-decoration属性，则将其删除
+        if(rule.style.textDecoration) {
+            if (ss.deleteRule) ss.deleteRule(i);
+            else if (ss.removeRule) ss.removeRule(i);
+            i--;
+        }
+    }
+
+
+</script>
+</body>
+</html>

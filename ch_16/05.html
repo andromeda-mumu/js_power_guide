@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>脚本化CSS类</title>
+    <style>
+        .attention{ /*吸引用户注意力的样式*/
+            background-color: yellow;
+            font-weight: bold;
+            border: solid black 2px;
+        }
+    </style>
+</head>
+<body>
+<button class="attention" onclick="return releaseAttention(this)">注意啦</button>
+<script>
+    function grabAttention(e) {
+        e.className ="attention";
+    }
+    function releaseAttention(e) {
+        e.className ="";
+    }
+
+</script>
+</body>
+</html>

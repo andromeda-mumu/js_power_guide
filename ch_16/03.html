@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS动画</title>
+    <style>
+        .fadeable{transition:opacity .5s ease-in}
+    </style>
+</head>
+<body>
+<button  >shake and fade</button>
+<script>
+    //将e 转化为相对定位的元素 是之左右 震动
+    /**
+     * 第一个参数  元素对象 或 元素ID
+     * 第二个参数  函数
+     * 第三个参数  指定e震动的距离
+     * 第四个参数  指定震动多久 默认500ms
+     */
+    function shake(e,oncomplete,distance,time) {
+        if(typeof  e==="string")e =document.getElementById(e);
+        if(!time) time =500;
+        if(!distance) distance=5;
+        var originalStyle = e.style.cssText;
+        e.style.position="relative";
+        var start = (new Date()).getTime();
+        animate();
+
+        function animate() {
+            var now = (new Date()).getTime();
+            var elapsed = now-start;
+            var fraction = elapsed/time; //占总时间的几分之几
+            if(fraction<1){
+                var x= distance *Math.sin(fraction*4*Math.PI);
+                e.style.left = x+"px";
+
+                setTimeout(animate,Math.min(25,time-elapsed));
+            }else{
+                //回复原始样式
+                e.style.cssText =originalStyle;
+                if(oncomplete) oncomplete(e);
+            }
+        }
+    }
+
+    //以毫秒级时间将e从完全不透明淡出到完全透明
+    //在调用函数时假设e是完全不透明的
+    function fadeOut(e,oncomplete,time) {
+        if(typeof  e==="string") e=document.getElementById(e);
+        if(!time) time=500;
+        var ease =Math.sqrt;
+        var start = (new Date()).getTime();
+        animate();
+        function animate() {
+            var elapsed = (new Date()).getTime()-start;
+            var fraction = elapsed/time;
+            if(fraction<1){
+                var opacity =1-ease(fraction);
+                e.style.opacity = String(opacity);
+                setTimeout(animate,Math.min(25,time-elapsed));
+            }else{
+                e.style.opacity="0";
+                if(oncomplete) oncomplete(e);
+            }
+        }
+    }
+
+</script>
+</body>
+</html>
