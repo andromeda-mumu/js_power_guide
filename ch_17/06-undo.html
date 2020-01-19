@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>鼠标滚轮</title>
+
+</head>
+<body>
+
+<script src="../js/whenReady.js"></script>
+<script src="../js/Enclose.js"></script>
+<script>
+    /*没有效果*/
+    whenReady(function () {
+        enclose(document.getElementById("content"),400,200,-200,-300);
+    })
+</script>
+<style>
+    div.enclosure{
+        border: solid black 10px;
+        margin:10px;
+        background-color: magenta;
+    }
+</style>
+<img id="content" src="../images/mm.png"/>
+</body>
+</html>

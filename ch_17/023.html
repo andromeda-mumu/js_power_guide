@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>addEventListener</title>
+</head>
+<body>
+<button id="mybutton">click me </button>
+<script>
+    var ff =function(){
+        alert("thanks agains");
+    };
+    var b = document.getElementById("mybutton");
+    b.onclick = function () {
+        alert("thanks for click me ");
+    }
+    b.addEventListener("click",ff,false);
+    b.addEventListener("click",function () {
+        alert("thanks agains");
+    },false);
+    document.removeEventListener("click",ff,true);
+</script>
+</body>
+</html>

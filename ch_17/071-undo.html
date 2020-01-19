@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>作为拖放目标和拖放源的列表</title>
+</head>
+<body>
+<script src="../js/whenReady.js"></script>
+<script>
+    whenReady(function () {
+        //查找所有的<ul class='dnd'>元素,并对其调用dnd函数
+        var lists = document.getElementsByTagName("ul");
+        var regexp = /\bdnd\b/;
+        for(var i=0;i<lists.length;i++){
+              if(regexp.test(lists[i].className)) dnd(lists[i]);
+        }
+
+        //将列表元素添加拖放事件处理程序
+        function dnd(list) {
+            var original_class = list.className;
+            var entered =0;
+            //检查拖放对象包含的数据格式它是否能处理，如果能，它返回false来表示有兴趣放置，它会高亮拖放目标
+            list.ondragenter = function (e) {
+                e =e ||window.event;
+                var from =e.relatedTarget;
+                //如果从列表外 或 第一次进入，需要做一些处理
+                entered++;
+                if((from &&!ischild(from,list))||entered==1){
+                    var dt =e.dataTransfer;
+                    var types =dt.types;
+
+                    if(!types ||(types.contains && types.contains("text/plain"))||
+                    (types.indexOf && types.indexOf("text.plain")!=-1)){
+                        list.className = original_class+" droppable";
+                        return false;
+                    }
+                    //如果无法识别数据类型，不希望拖放
+                    return ;//取消
+                }
+                return false;//
+            };
+            //指针悬在列表上。必须返回false,否则拖放操作将取消
+            list.ondragenter =function(e){return false;}
+
+            //拖放读写移除列表或从子元素移出时
+            list.ondragleave = function (e) {
+                e =e||window.e;
+                var to = e.relatedTarget;
+                //取消高亮
+                entered--;
+                if((to && !ischild(to,list))|| entered<=0){
+                    list.className = original_class;
+                    entered=0;
+                }
+                return false;
+            };
+
+            //当实际放置时，会调用这个程序
+            list.ondrop =function (e) {
+                e= e|| window.event;
+                //获得放置的纯文本数据
+                var dt = e.dataTransfer;
+                var text = dt.getData("Text");
+                //如果得到文本，放置在列表尾部的新项
+                if(text){
+                    var item = document.createElement("li");
+                    item.draggable =true;
+                    item.appendChild(document.createTextNode(text));
+                    list.appendChild(item);
+
+                    //恢复列表的原始样式 且 重置进入次数
+                    list.className = original_class;
+                    entered=0;
+                    return false;
+                }
+            };
+            //使原始所有列表都可拖动
+            var items=list.getElementsByTagName("li");
+            for(var i=0;i<items.length;i++){
+                       items[i].draggable =true;
+            }
+            //拖动列表项注册事件处理程序，让事件从列表项向上冒泡
+            list.ondragstart =function (e) {
+                var e=e||window.event;
+                var target = e.target || e.srcElement;
+                //如果不是从li 向上冒泡，则忽略
+                if(target.tagName!=="LI") return false;
+                var dt =e.dataTransfer;
+                dt.setData("Text",target.innerText||target.textContent);
+                //设置允许复制和移动这些数据
+                dt.effectAllowed ="copyMove";
+            };
+            //当成功的放置后，将调用这个处理程序
+            list.ondragend = function (e) {
+                var e=e||window.event;
+                var target = e.target||e.srcElement;
+                //如果拖放操作是move,则删除列表项
+                if(e.dataTransfer.dropEffect ==="move")
+                    target.parentNode.removeChild(target);
+            }
+            //a 是 b 的子元素
+            function ischild(a,b) {
+                for(;a;a=a.parentNode) if(a===b) return true;
+                return false;
+
+            }
+        }
+    });
+</script>
+</body>
+</html>

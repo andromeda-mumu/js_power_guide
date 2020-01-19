@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件取消</title>
+</head>
+<body>
+<script>
+    function cancelHandler(event) {
+        var event = event || window.event;
+        if(event.preventDefault) event.preventDefault();
+        if(event.returnValue) event.returnValue =false;
+        return false;
+    }
+</script>
+</body>
+</html>
