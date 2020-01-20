@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>一个使用EventSource的简易聊天客户端</title>
+</head>
+<body>
+<script>
+    window.onLoad = function () {
+        var nick = prompt("Enter your nickname");
+        var input = document.getElementById("input");
+        input.focus();
+
+        //通过eventSource注册新消息的通知
+        var chat = new EventSource("/chat");
+        chat.onmessage = function (event) {
+            var msg = event.data; //当捕获一条消息时
+            var node = document.createTextNode(msg);
+            var div = document.createElement("div");
+            div.appendChild(node);
+            document.body.insertBefore(div,input);
+            input.scrollIntoView();
+        }
+        input.onchange=function () {
+            var msg = nick +":"+input.value;
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST","/chat");
+            xhr.setRequestHeader("Content-Type","text/plain;charset=UTF-8");
+            xhr.send(msg);
+            input.value ="";
+        }
+    };
+</script>
+<input id="input" style="width:100%">
+</body>
+</html>

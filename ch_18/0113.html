@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用HEAD 和 CORS 请求链接详情信息</title>
+</head>
+<body>
+<script>
+    whenReady(function () {
+        var supportsCORS = (new XMLHttpRequest()).withCredentials!==undefined;
+         var links =document.getElementsByTagName('a');
+         for(var i=0;i<links.length;i++){
+                    var link = links[i];
+                    if(!link.href)continue;
+                    if(link.title)continue;
+                    //跨域链接
+                    if(link.host!==location.host || link.protocol!==location.protocol){
+                        link.title ="站外链接";
+                        if(!supportsCORS) continue;
+                    }
+                    if(link.addEventListener)
+                        link.addEventListener("mouseover",mouseoverHandler,false);
+         }
+         function mouseoverHandler(e) {
+             var link = e.target||e.srcElement;
+             var url = link.href;
+             var req = new XMLHttpRequest();
+             req.open("HEAD",url);
+             req.onreadystatechange = function () {
+                 if(req.readyState!==4) return ;
+                 if(req.status===200){
+                     var type = req.getResponseHeader("Content-Type");
+                     var size = req.getResponseHeader("Content-Length");
+                     var date = req.getResponseHeader("Last-Modified");
+                     link.title = "类型"+type+" \n"+"大小："+size+" \n"+"时间："+date;
+                 }else{
+                     if(!link.title)
+                         link.title ="Could't fetch details:\n"+req.status+" "+req.statusText;
+                 }
+             };
+             req.send(null);
+             if(link.removeEventListener)
+                 link.removeEventListener("mouseover",mouseoverHandler,false);
+         }
+    })
+</script>
+</body>
+</html>
