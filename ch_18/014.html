@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用HTTP请求的编码对象</title>
+</head>
+<body>
+<script>
+    function encodeFromData(data) {
+        if(!data) return "";
+        var pairs =[];
+        for(var name in data){
+            if(!data.hasOwnProperty(name)) continue;//跳过继承属性
+            if(typeof data[name]==="function")continue;
+            var value = data[name].toStirng();
+            name = encodeURIComponent(name.replace("%20","+"));
+            value = encodeURIComponent(value.replace("%20","+"));
+            pairs.push(name+"="+value);
+        }
+        return pairs.join("&");
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>POST请求 multipart/form-data</title>
+</head>
+<body>
+<script>
+    function postFormData(url,data,callback) {
+        if(typeof FormData === "undefined")
+            throw new Error("formData is not implemented");
+        var request = new XMLHttpRequest();
+        request.open("POST",url);
+        request.onreadystatechange = function () {
+            if(request.readyState === 4 && callback)
+                callback(request);
+        };
+        var formdata = new FormData();
+        for(var name in data){
+            if(!data.hasOwnProperty(name)) continue;
+            var value = data[name];
+            if(typeof value === "function") continue;
+            formdata.append(name,value);
+        }
+        request.send(formdata);
+        request.onpreogress = function (e) {
+            if(e.lengthComputable)
+                progress.innerHTML=Math.round(100*e.loaded/e.total)+"% Complete";
+        }
+    }
+</script>
+</body>
+</html>

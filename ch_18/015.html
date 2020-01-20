@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用表单编码数据 发起HTTP POST 请求</title>
+</head>
+<body>
+<script>
+    function postData(url,data,callback) {
+        var request = new XMLHttpRequest();
+        request.open("POST",url);
+        request.onreadystatechange = function () {
+            if(request.readyState === 4 && callback)
+                callback(request);
+        };
+        request.setRequestHeader("Content-Type","application/x-www-form-urlencloded");
+        request.send(encodeFromData(data));//发送表单数据
+    }
+</script>
+</body>
+</html>

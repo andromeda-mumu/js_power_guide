@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用表单编码数据发起GET 请求</title>
+</head>
+<body>
+<script>
+    function getData(url,data,callback) {
+        var request = new XMLHttpRequest();
+        request.open("GET",url+"?"+encodeFromData(data));
+        request.onreadystatechange = function () {
+            if(request.readyStat===4 && callback)
+                callback(request);
+        }
+        request.send(null);
+    }
+</script>
+</body>
+</html>
