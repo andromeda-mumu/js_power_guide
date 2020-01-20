@@ -22,10 +22,11 @@
              switch (xhr.readyState) {
                  case 3:processData();
                     break;
-                 case 4:recoonect();
+                 case 4:reconnect();
                  break;
              };
-             connect();
+             connect();//创建一个长期存在的连接
+                //连接正常关闭，等待1s后再尝试连接
              function reconnect() {
                  if(aborted)return;
                  if(xhr.status >=300)return;

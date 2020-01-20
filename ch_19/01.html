@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var img=$("<img/>",//创建一个img元素
+        {src:url, //具有HTML属性
+        css:{borderWidth:5},//CSS样式
+        click:handleClcik //事件处理程序
+        });
+    $("div").each(function (index) {
+        $(this).prepend(index+": ");
+        if(this.id==="last") return false;
+    })
+    $("header").map(function () {
+        return this.id;
+    }).toArray().sort();
+
+    $("div").each(function () {
+       if($(this).is(":hidden")) return ;//跳过隐藏函数
+    });
+
+    $("form").attr("action");
+    $("#icon").attr("src","icon.gif");
+    $("#banner").attr({src:"banner.gif",alt:"Advertisement",width:720,height:64});
+    $("a").attr("target","_blank");
+    $("a").attr("target",function () {
+        if(this.host==localname.host) return "-self";
+        else return "_blank";
+    });
+    $("a").attr({target:function() {  }});
+    $("a").removeAttr("target");
+
+    $("h1").css("font-weight");
+    $("h1").css("fontWeight");
+    $("h1").css("font");
+    $("h1").css("font-variant","smallcaps");
+    $("div.note").css("border","solid black 2px");
+    $("h1").css({
+        backgroundColor:"black",
+        textColor:"white",
+        fontVariant:"small-caps",
+        padding:"10px 2px 4px 20px",
+        border:"dotted black 4px"
+    });
+
+    $("h1").css("font-soze",function (i,curval) {
+        return Math.round(1.25*parseInt(curval));
+    });
+</script>
+</body>
+</html>

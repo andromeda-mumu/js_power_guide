@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>定制的server_sent Events聊天服务器</title>
+</head>
+<body>
+<script>
+    /*这是基于nodeJS的服务器。不能这样写。但因为我现在没有安装。所以。。。。*/
+    //这用的是服务端的JS，运行在NodeJS平台上
+    var http = require('http');//NodeJS http服务器API
+    var clientui = require('fs').readFileSync("chatclient.html");
+    var emulation = require('fs').readFileSync("EventSourceEmulation.js");
+    //ServerResponse 对象数组，用于接收发送的事件
+    var clients=[];
+    //每隔20s发送一条注释到客户端，这样就不会关闭连接了
+    setInterval(function () {
+        clients.forEach(function (client) {
+            client.write(":ping?n");
+        })
+    },20000);
+    //创建一个新的服务器
+    var server = new http.Server();
+    //当服务器获得一个新请求，运行回调函数
+    server.on("request",function (request,response) {
+        var url = request('url').parse(request.url);
+        //如果请求是发送到"/"，服务器就发送客户端聊天室UI
+        if(url.pathname==="/"){
+            response.writeHead(200,{"Content-Type":"text/html"});
+            response.write(clientui);
+            response.end();
+            return;
+        }else if(url.pathname!=="/chat"){//如果请求是发送到“chat”之外的地址，则返回404
+            response.writeHead(404);
+            response.send();
+            return;
+        }
+        //如果请求类型是post，那么就有一个客户端发送了一条新的消息
+        if(response.method === "POSY"){
+            request.setEncoding("UTF-8");
+            var body ="";
+            //在获取数据之后，将其添加到请求主体中
+            request.on("data",function (chunk) {
+                body +=chunk;
+            });
+            //当请求完成时，发送一个空响应。并将消息传播到所有处于监听状态的客户端
+            request.on("end",function () {
+                response.writeHead(200);
+                response.end();
+                //将消息转换成文本/事件流格式，确保每一行的前缀都是“data" ,并以两个换行符结束
+                message = 'data:'+body.replace('\n','\ndata: ')+"\r\n\r\n";
+                clients.forEach(function (client) {
+                    client.write(message);
+                });
+            });
+        }else{
+            //如果不是POST类型的请求，则客户端正则请求一组消息
+            response.writeHead(200,{'Content-Type':"text/event-stream"});
+            response.write("data: Connected\n\n");
+            //如果客户端关闭了链接，从活动客户端数组中删除对应的响应对象
+            request.connection.on("end",function () {
+                clients.splice(clients.indexOf(response),1);
+                response.end();
+            });
+            clients.push(response);
+        }
+    });
+    //启动服务器监听8000 断开。
+    server.listen(800);
+</script>
+</body>
+</html>
