@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>包装元素</title>
+</head>
+<body>
+<h1>我是一行</h1>
+<p>
+    我是一段
+</p>
+<p>我是第二段</p>
+<p>我是第三段</p>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<script>
+    //用i元素包装所有的h1元素
+    $("h1").wrap(document.createElement("i"));// <i><h1>...</h1></i>
+    //包装所有h1元素的内容
+    // $("h1").wrapInner("<i/>"); //<h1><i>...</i></h1>
+    //将第一个段落包装在一个锚点 和 div 里
+    $("body>p:first").wrap("<a name='lead' href='http:www.baidu.com'><div class='first' style='background-color: magenta'></div></a>");
+    //将所有的其他段落包装在 另一个div里
+    $("body>p:not(:first)").wrapAll("<div class='rest' style='background-color: #99ff00'></div>"); //mmc-todo   这里并没有把所有其他的 都包含在一个div里啊
+
+</script>
+</body>
+</html>

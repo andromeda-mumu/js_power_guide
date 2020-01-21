@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>获取和设置HTML表单值</title>
+</head>
+<body>
+<script>
+    $("#surname").val();
+    $("#usstate").val(); //为啥这是从 select 中获取一值。哪里看出是select 了
+    $("select#extras").val();
+
+    $("input:radio[name=ship]:checked").val();
+    $("#email").val("Innvalid email address");
+    $("input:checkbox").val(["opt1","opt2"]);//选中带 这些名字的复选框
+    $("input:text").val(function () { //重置所有文本域为默认值
+        return this.defaultValue;
+    })
+
+
+</script>
+</body>
+</html>

@@ -5,6 +5,34 @@
     <title>获取和设置css类</title>
 </head>
 <body>
+<script>
+    //添加css
+    $("h1").addClass("hilite");
+    $("h1+p").addClass("hilite first");
+    $("section").addClass(function (n) {
+        return "section"+n;
+    });
+    //刪除css类
+    $("p").removeClass("hilite");
+    $("p").removeClass("hilite first");
+    $("section").removeClass(function (n) {
+        return "section"+n;
+    });
+    $("div").removeClass();
 
+    //切换css类
+    $("tr:odd").toggleClass("oddrow");
+    $("h1").toggleClass("biug bold");
+    $("h1").toggleClass(function (n) {
+        return "big bold h1-"+n;
+    });
+    $("h1").toggleClass("hilite",true);
+    $("h1").toggleClass("hilite",false);
+    //检测CSS类
+    $("p").hasClass("first");
+    $("#lead").is(".first");
+    $("#lead").isPrototypeOf(".first.hilite");
+
+</script>
 </body>
 </html>
