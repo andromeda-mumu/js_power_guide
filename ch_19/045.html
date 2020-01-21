@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注销事件处理程序</title>
+</head>
+<body>
+<script>
+    $("*").unbind();
+    $("a").unbind("mouseenter  mouseover");
+
+    $("a").unbind("mouseover.myMod mouseout.myMod");
+    $("a").unbind(".myMod");
+    $("a").unbind("click.ns1.ns2");
+    $("a").unbind({mouseover:mouseoverHandler,mouseout:mouseoutHandler});
+
+    $("button").trigger("click.ns1");
+    $("button").trigger("click!");
+
+    $("#button").click(function(e){$("#button2").trigger(e);});
+    $("#button1").trigger({type:'click',synthetic:true});
+    $("#button1").click(function(e){if (e.synthetic){  }});
+</script>
+</body>
+</html>

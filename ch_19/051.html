@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动画</title>
+</head>
+<body>
+<p id="message" style="background-color: #ff0000" onclick="fun()">
+    我是一段文字
+</p>
+<img src="../images/haha.png" id="img" onclick="animImg()">
+<script src="../js/jquery-3.4.1.min.js"></script>
+<script>
+    function fun(){
+        // $("#message").fadeIn("slow",function(){$(this).text("hello world")});
+        $("#message").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn({
+            duration:"slow",
+            complete:function () {
+                $(this).text("hello world");
+            }
+        });
+    };
+
+    function animImg() {
+        $("#img").fadeOut().show(300).slideUp().slideToggle();
+    }
+
+</script>
+</body>
+</html>

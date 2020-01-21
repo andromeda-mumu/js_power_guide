@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>实时事件</title>
+</head>
+<body>
+<script>
+    $(document).delegate("a","mouseover",linkHandler);
+    $("a").bind("mouseover" ,linkHandler);//静态链接的静态事件
+    $(".dynamic").delegate("a","mouseover",linkHandler);//动态更新的部分使用实时事件处理
+
+    $("a").live("mouseover",linkHandler);
+    $("a",$(".dynamic")).live("mouseover",linkHandler);
+
+    //这两行等价
+    x.live(type,handler);
+    $(x.context).delegate(x.selector,type,handler);
+
+    $("a").die('mouseover');
+    $("a").die("mouseover",linkHandler);
+    //利用undelegete来完成
+    $(document).updelegeta('a');
+    $(document).undelegate('a',"mouseover");
+    $(document).undelegate("a","mouseover",linkHandler);
+</script>
+</body>
+</html>

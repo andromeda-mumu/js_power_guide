@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //mouseover 处理程序在命名空间mymod中把f绑定到所有元素
+    $("a").bind('mouseover.myMod' ,f);
+    //在命名空间中 myMod  和 yourMod 中作为mouseout处理程序绑定 f
+    $("a").bind("mouseour.myMod.yourMod",f);
+
+    $("a").hover(f,g); //等价于
+    $("a").bind({mouoseenter:f,mouseleave:g});
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>取消 延迟 和队列</title>
+</head>
+<body>
+<img src="../images/mm.png">
+<script src="../js/jquery-3.4.1.min.js"></script>
+<p id="message" style="border-width:100px;border-color: #99ff00">
+    我是一段文字
+</p>
+<script>
+    function func1() {
+        $("img").bind({
+            mouseover:function(){ $(this).stop().fadeTo(300,1.0);},
+            mouseout:function(){$(this).stop().fadeTo(300,0.5);}
+        });
+    }
+    // func1();
+    function fun2() {
+        $("img").fadeTo(100,0.5).delay(300).slideUp();
+    }
+    // fun2();
+    function fun3(){
+        $("img").bind({
+            mouseover:function(){$(this).stop(true).delay(100).fadeTo(300,1.0);},
+            mouseout:function(){$(this).stop(true).fadeTo(300,0.5);}
+        })
+    }
+    // fun3();
+    function func4(){
+        $("#message").fadeIn().delay(400).queue(function(next){
+            $(this).text("hello world");
+            next();
+        }).animate({borderWidth:"+=10px"});
+    }
+    func4();
+</script>
+</body>
+</html>

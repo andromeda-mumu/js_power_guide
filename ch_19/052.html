@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义动画</title>
+</head>
+<body>
+<img src="../images/mm.png" id="img" onclick="imgAn()">
+<p id="sprite" onclick="anim2()">
+    hello  world
+</p>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<script>
+    function imgAn(){
+        $("#img").animate({height:0});
+    }
+
+    function anim2() {
+        $("#sprite").animate({
+            opacity:.25,
+            "font-size":10
+        },{
+            dutation:500,
+            complete:function f() {
+              $(this).text("complete");
+            }
+        })
+    }
+    function a(){
+        $("p").animate({
+            "margin-left":"-=.5in",
+            opacity:"-=.1"
+        })
+    }
+    function f() {
+        $("img").animate({
+            width:"show",
+            borderLeft:"show",
+            borderRight:"show",
+            paddingLeft:"show",
+            paddingRight:"show"
+        });
+    }
+    // f();
+    function fun2() {
+        $("img").fadeIn(500).animate({"width":"+=100"},{queue:false,duration:1000}).fadeOut(500);
+    }
+    // fun2();
+    function fun3() {
+        $("img").animate({"width":"+=100"},{duration:500,easing:"linear"});
+    }
+    // fun3();
+    function fun4() {
+        $("img").animate({width:"+=100"},500,"linear");
+    }
+    // fun4();
+    //为不同的CSS动画属性 指定不同的缓动函数
+    //用hide方法隐藏图片，用线性动画
+    //不透明度使用默认的swing缓动函数
+    function fun5() {
+        $("img").animate({width:"hide",height:"hide",opacity:"hide"},{specialEasing:{width:"linear",height:"linear"}});
+    }
+    // fun5();
+    //第二种实现方式
+    function fun6() {
+        $("img").animate({
+            width:["hide","linear"],
+            height:["hide","linear"],
+            opacity:"hide"
+        });
+    };
+    fun6();
+</script>
+</body>
+</html>
