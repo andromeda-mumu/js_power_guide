@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>删除和替换元素</title>
+</head>
+<body>
+<h1>哈哈哈哈哈0</h1>
+<!--<h1>哈哈哈哈哈1</h1>-->
+<h2>哈哈哈哈哈2</h2>
+<h2>哈哈哈哈哈3</h2>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<script>
+    // $("#log").append("<br/>"+message);
+  //   $("h1").prepend("@");
+  //   $("h1").before("秘密");
+  //   $("h1").after("<hr/>");
+  //   $("h1").replaceWith("<br/>");
+  //   $("h2").each(function () {
+  //       var h2 = $(this);
+  //       h2.replaceWith("<h1>"+h2.html()+"</h1>");
+  //   });
+  // $("h1").map(function(){return this.firstChild;}).before("$$");
+
+  console.log("-----第二种实现方案--------");
+  // $("<br>+message").appendTo("#log");
+    $(document.createTextNode("hhhh")).appendTo("h1");//所有h1添加文本节点
+    // ("<hr/>").insertBefore("h1");
+    $("<hr/>").insertAfter("h1");
+    $("<br/>").replaceAll("hr");
+</script>
+
+</body>
+</html>

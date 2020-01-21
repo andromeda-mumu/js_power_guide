@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>获取和设置元素的 位置宽高</title>
+</head>
+<body>
+<h1>哈哈哈哈哈</h1>
+<h1>哈哈哈哈哈</h1>
+<h2>哈哈哈哈哈</h2>
+<h1>哈哈哈哈哈</h1>
+<h1>哈哈哈哈哈</h1>
+<h1>哈哈哈哈哈</h1>
+<h1>哈哈哈哈哈</h1>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<script>
+    // var elt =$("#sprite");
+    // var position =elt.offset();
+    // position.top +=100;
+    // elt.offset(position);
+    //将所有h1向右移动，移动的举例取决于它们在文档中的距离
+    $("h1").offset(function (index,pos) {
+        return {left:pos.left+25*index,top:pos.top};
+    });
+
+    function page(n) {
+        var w = $(window);
+        var pagesize = w.height();
+        var current = w.scrollTop();
+        w.scrollTop(current+n*pagesize);
+    }
+</script>
+</body>
+</html>

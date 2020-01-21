@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>获取和设置元素数据</title>
+</head>
+<body>
+<script>
+    $("div").data("x",1);
+    $("div.nodata").removeData("x");
+    var x = $("#mydiv").data("x");
+</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>复制元素</title>
+</head>
+<body>
+<a href="http://www.baidu.com">这是一个链接</a>
+<a href="http://www.baidu.com">这是二个链接</a>
+<a href="http://www.baidu.com">这是三个链接</a>
+<a href="http://www.baidu.com">这是四个链接</a>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<script>
+    $(document.body).append("<div id='linklist' style='background-color: magenta'><h1>list of links</h1></div>");
+    $("a").clone().appendTo("#linklist");
+    $("#linklist > a").after("<br/>");
+</script>
+</body>
+</html>

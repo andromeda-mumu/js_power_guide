@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>设置和获取元素</title>
+</head>
+<body>
+<h1>一一一</h1>
+<h1>二二二</h1>
+<h1>三三三</h1>
+<h1>四四四</h1>
+<h1>五五五</h1>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<script>
+    var title = $("head title").text();//获取文档标题
+    var headline =$("h1").html();
+    $("h1").text(function (n,current) { //给每个标题添加章节号
+        return "$"+(n+1)+":"+current ;
+    })
+
+</script>
+</body>
+</html>
