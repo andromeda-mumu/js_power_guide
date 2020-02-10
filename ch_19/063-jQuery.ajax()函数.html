@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<script>
+    /**
+     *jQuery所有ajax工具最后都会调用jQuery.ajax()
+     * jQuery.ajax() 只接受一个参数 ：一个选项对象，该对象的属性指定Ajax请求如何执行的 很多细节
+     *
+    */
+    //=======以下2个方法调用是 等价的
+    jQuery.getScript(url,callback);
+    jQuery.ajax({
+        type:"GET",
+        url:url,
+        data:null,
+        dataType:"script",
+        success:callback
+    });
+
+    //=================================
+    jQuery.ajaxSetup({
+        timeout:2000,  //2s后 取消所有的ajaz请求
+        cache:false  //通过给URL 添加时间戳来禁用浏览器缓存
+    });
+    jQuery.get("data.txt").success(function(data){console.log("Got",data);}).success(function (data) {process(data);})
+
+    /**
+     * 回调：
+     * context: 指定上下文对象this.如果设置，应该为window,document,或触发事件所在的Element
+     * beforeSend:  请求发送前的回调函数，如果该函数返回false,Ajax请求会被取消
+     * success : 请求成功时回调 三个参数：服务器发送的数据，jQuery状态码，发送该请求的XMLHttpRequest对象
+     * error: 不成功的回调
+     * complete : 在调用success/error之后来完成的
+    */
+
+
+</script>
+</body>
+</html>

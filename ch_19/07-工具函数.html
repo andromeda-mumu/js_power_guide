@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * jQuery.browser  是一个对象，用语客户端嗅探
+    */
+    if($.browser.mozilla && parseInt($.browser.version)<4){
+        //在此解决一个假设的firefox bug..
+    }
+    /**
+     * jQuery.contains()  接收2个文档元素作为参数
+     * jQuery.each()  可以遍历数组元素和对象属性。 arg0: 数组或对象 atg1 : 是要在每个数组元素或对象属性上调用的函数 ，函数带有2个参数：
+     *     数组元素的序号或对象的属性名，数组元素的值或对象的属性值。 如果函数返回false,each会停止遍历并立刻返回。
+     *     总是返回第一个参数的值
+     * jQuery.extend()  arg0: 对象 。它会将第二个及其以后参数对象的属性复制到第一个参数对象中，如果同名，则覆盖。该函数会忽略任何值为undefined或null的属性
+     *     第一个参数为true,则是深拷贝
+    */
+    var clone = jQuery.extend({},original);
+    var options = jQuery.extend({},defalt_options,use_options);
+
+    /**
+     *jQuery.globalEval()  会在全局上下文中执行JS代码字符串，就像它是<script>元素的内容一样
+     * jQuery.grep()  与array的filter方法 类型。【arg0: 数组  arg1: 判断函数  arg2: boolean  是否翻转判断函数】\
+     * jQuery.inArray()  与array的indexOf方法类似 【arg0: 任意值  arg1: 数组 return：第一个参数在数组中的位置】
+     * jQuery.isArray()
+     * jQuery.isEmptyObject()
+     * jQuery.isFunction()
+     * jQuery.isPlainObject()  【return; 参数是否是纯对象实例】
+     * jQuery.makeArray() 如果参数是类数组对象，该函数将对象的属性复制到一个新的（真）数组中，并返回该数组。如果参数不是类数组对象，则会返回一个新数组，只包含传入的参数
+     * jQuery.map() 【arg0: 类数组 arg1: 映射函数】
+     * jQuery.merge() 接收2个数组，第二个参数的元素添加到第一个上面，并返回第一个参数。浅拷贝数组对象
+    */
+    var clone = jQuery.merge([],original);
+    
+    /**
+     *jQuery.parseJSON()
+     * jQuery.proxy() 【arg0: 函数 arg1: 对象  return : 返回新函数，该函数作为第二个参数对象的方法调用】
+     * jQuery.support 用来做可移植的特性探测。
+     * jQuery.trim() 移除字符串的空白字符
+    */
+
+
+</script>
+</body>
+</html>

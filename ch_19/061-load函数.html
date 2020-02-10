@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<script>
+    //load 方法
+    //作用: 传入一个url，异步加载url的内容，然后将每一个选中元素中，替换调已经存在的任何内容
+    setInterval(function () {
+        $('#status').load("status_report.html");
+    },2000);
+    //=======如果load第一个参数不是字符串，是函数的话，那么load方法就是事件处理程序注册方法。
+
+    //=======如果只想显示被加载文档的一部分，可以在URL后面添加一个空格 和一个jQuery选择器。 当URL 加载好后，jQuery会用指定的选择器来从加载好的HTML重选取要显示的部分
+    $('#temp').load("wheather_report.html #temperature");
+
+    /**
+     * =======除了必须的URL参数，还可以接受2个可选参数。
+     *其一：第一个可选参数表示的数据可以追加到URL后面。或者与请求一起发送。如果传入字符串，直接放在“？”或 “&”后面。如果是对象，则对象会被转换为
+     *      用&分隔的名值对于请求一起发送。
+     *
+    */
+    //=======通常load是get请求，但传入数据对象，则变成POST请求了
+    $('#temp').load("myhtml.html",{sex:"男",age:18});
+
+    /**
+     *第二个可选参数回调函数。
+     * jquery的Ajax状态码
+     * success
+     * notmodified   :只在 ifModified=true时，才生效。返回304，代表数据和上一次请求没有发生变化
+     * error:请求失败
+     * timeout:超时
+     * parsererror: 解析数据失败
+    */
+
+</script>
+</body>
+</html>

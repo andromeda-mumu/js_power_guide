@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<script>
+    /**
+     *jQuery.getScript
+     * 第一个参数：js代码文件的URL
+     * 第二个参数：回调函数
+     * 作用： 异步加载文件
+    */
+    jQuery.getScript("http://example.com/js/widget.js");
+    jQuery.getScript("js/myjs.js",function () {
+        $('div').my_plugin();//使用加载的类库
+    })
+
+    /**
+     *jQuery.getJson() ：获取文本，特殊处理下，再调用指定的回调函数
+     * 会将结果传给回调函数作为参数
+    */
+    //假设data.json包含文本{x:1,y:2}
+    jQuery.getJson('data.json',function (data) {
+        //data 参数是对象{x:1,y:2}
+    })
+
+    /**
+     *jQuer.get()  jQuery.post()
+     * 可作为参数传递的数据类型：
+     * text  :将服务器的响应作为纯文本返回，不做任何处理
+     * html ：该类型和text一样
+     * xml: 给回调函数的值表示该XML文档的document对象
+     * script : 可以处理跨域请求
+     * json :会使用jQuery.parseJSON() 来解析返回的内容
+     *jsonp ：
+     *
+     * 当函数没有指定以上类型时，jQuery会检查HTTP响应中Content-Type头。如果该头部信息包含xml字符串，则传入回调函数的是XML文档。否则，如果头部
+     * 包含json字符串，则数据被解析成json并把解析后的对象传给回调函数。否则，如果头部含有javascript字符串，则数据被当做脚本执行。
+    */
+    //=======从服务器请求文本并在警告对话框中显示
+    jQUery.get("debug.txt",alert);
+
+
+</script>
+</body>
+</html>
